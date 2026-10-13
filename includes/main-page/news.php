@@ -1,11 +1,11 @@
-<section class="news">
+<section class="news" id="news">
     <div class="container">
         <h2 class="news__title">Новости</h2>
 
         <div class="news__slider">
             <div class="swiper">
                 <div class="swiper-wrapper news__track">
-                    <a class="swiper-slide news-card" href="https://motorsky.ru/tpost/klk2rs3y51-biznes-plan" target="_blank" rel="noreferrer">
+                    <a class="swiper-slide news-card" href="news-page.php" target="_blank" rel="noreferrer">
                         <div class="news-card__img">
                             <img src="/assets/img/news-2.jpg" alt="Бизнес-план">
                         </div>
@@ -14,7 +14,7 @@
                             <p class="news-card__desc">В Перми создано производство бесколлекторных электродвигателей для БПЛА.</p>
                         </div>
                     </a>
-                    <a class="swiper-slide news-card" href="https://motorsky.ru/tpost/z92ivyv4i1-uchastniki-permskogo-nots-predstavili-v" target="_blank" rel="noreferrer">
+                    <a class="swiper-slide news-card" href="news-page.php" target="_blank" rel="noreferrer">
                         <div class="news-card__img">
                             <img src="/assets/img/news-1.jpg" alt="Участники Пермского НОЦ представили в Совете Федерации свои разработки">
                         </div>

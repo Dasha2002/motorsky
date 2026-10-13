@@ -1,4 +1,3 @@
-
 (function () {
   'use strict';
 
@@ -363,16 +362,115 @@
     }
   }
 
+  /* ============ Свайпер hero-product (страницы товаров) ============ */
+
+function initProductSwiper() {
+  var swiperEl = document.querySelector('.hero-product-swiper');
+
+  if (!swiperEl) return;
+
+  if (typeof window.Swiper === 'undefined') {
+    console.error('Swiper не загружен. Проверь подключение Swiper JS.');
+    return;
+  }
+
+  if (swiperEl.swiper) {
+    swiperEl.swiper.destroy(true, true);
+  }
+
+  var nextButton = swiperEl.querySelector('.hero-product-swiper-next');
+  var prevButton = swiperEl.querySelector('.hero-product-swiper-prev');
+
+  var swiper = new window.Swiper(swiperEl, {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+    spaceBetween: 0,
+    initialSlide: 0,
+    loop: true,
+    effect: 'slide',
+    speed: 500,
+    autoplay: {
+  delay: 1000,
+  disableOnInteraction: false,
+  pauseOnMouseEnter: true
+},
+    allowTouchMove: true,
+    observer: true,
+    observeParents: true,
+    navigation: {
+      nextEl: nextButton,
+      prevEl: prevButton
+    },
+    on: {
+      init: function () {
+        console.log('Слайдер запущен. Всего слайдов:', this.slides.length);
+      },
+      slideChange: function () {
+        console.log('Активный слайд:', this.realIndex);
+      }
+    }
+  });
+
+  if (nextButton) {
+    nextButton.onclick = function (event) {
+      event.preventDefault();
+      swiper.slideNext();
+    };
+  }
+
+  if (prevButton) {
+    prevButton.onclick = function (event) {
+      event.preventDefault();
+      swiper.slidePrev();
+    };
+  }
+
+  swiper.update();
+}
+
+
+
+
+  /* ============ Свайпер чертежей товара (на мобильных) ============ */
+  function initSchemasSwiper() {
+    if (typeof window.Swiper === 'undefined') return;
+    var swiperEl = document.querySelector('.pspec-schemas-swiper');
+    if (!swiperEl) return;
+
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+      if (!swiperEl.swiper) {
+        new window.Swiper(swiperEl, {
+          slidesPerView: 1,          // ← ТОЛЬКО 1 СЛАЙД
+          spaceBetween: 16,
+          loop: false,
+          navigation: {
+            nextEl: '.pspec-schemas-next',
+            prevEl: '.pspec-schemas-prev',
+          }
+          // ← УБРАЛ БРЕЙКПОИНТЫ
+        });
+      }
+    } else {
+      if (swiperEl.swiper) {
+        swiperEl.swiper.destroy(true, true);
+      }
+    }
+  }
+
+
   function boot() {
     initHeaderScroll();
     initNavDropdown();
     initPopups();
     initMobileMenu();
     initContactForm();
-    initPhoneMask();
+    initPhoneMask(); 
     initSearchPopup();
     initVideoLazy();
     initSliders();
+    initProductSwiper();
+    initSchemasSwiper();
   }
 
   if (document.readyState === 'loading') {

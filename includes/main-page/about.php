@@ -10,7 +10,7 @@
                 <p>Наше производство охватывает весь процесс: от проектирования, изготовления компонентов до многоуровневых испытаний готовых изделий.</p>
             </div>
         
-                <a href="/production.php" class="btn-ms">Подробнее</a>
+                <a href="/production-page.php" class="btn-ms">Подробнее</a>
             </div>
 
             <div class="about__photo">

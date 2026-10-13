@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
+    <?php include __DIR__ . '/includes/popap-form-contacts.php'; ?>
     <?php include __DIR__ . '/includes/header.php'; ?>
 
-    <?php include __DIR__ . '/includes/main-page/hero.php'; ?>
+    <?php include __DIR__ . '/includes/hero.php'; ?>
     <?php include __DIR__ . '/includes/main-page/features.php'; ?>
     <?php include __DIR__ . '/includes/main-page/products.php'; ?>
     <?php include __DIR__ . '/includes/main-page/directions.php'; ?>

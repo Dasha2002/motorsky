@@ -1,4 +1,6 @@
 <footer class="site-footer">
+
+<div class="hero__grid-footer"></div>
     <div class="container">
         <div class="site-footer__top">
             <div class="site-footer__contacts-block">
@@ -10,8 +12,16 @@
             </div>
 
             <div class="site-footer__nav-block">
+
+            <div class="footer-text-group">
                 <p class="site-footer__nav-heading">Электродвигатели</p>
-                <p class="site-footer__nav-sublabel">Электродвигатели BLDC:</p>
+                <div class="tn-atom"> 
+                    <img class="tn-atom__img t-img loaded" data-original="https://static.tildacdn.com/tild6432-6532-4362-b934-383965353934/menu-arrow-b.svg" src="https://static.tildacdn.com/tild6432-6532-4362-b934-383965353934/menu-arrow-b.svg" alt="" imgfield="tn_img_1746075353837">
+                 </div>
+            </div>
+                
+                
+                    <p class="site-footer__nav-sublabel">Электродвигатели BLDC:</p>
                 <div class="site-footer__bldc-row">
                     <a href="/product-2807.php">2807—1300 KV</a>
                     <a href="/product-2810.php">2810—1500 KV</a>
@@ -24,8 +34,8 @@
                     <span>Электродвигатели специального назначения</span>
                 </div>
                 <div class="site-footer__secondary-row">
-                    <a href="/production.php">Производство</a>
                     <a href="/#about">О компании</a>
+                    <a class="footer-a-black" href="/production.php">Производство</a>
                     <a href="/#contacts">Контакты</a>
                 </div>
             </div>
@@ -39,4 +49,5 @@
             </a>
         </div>
     </div>
+    
 </footer>
