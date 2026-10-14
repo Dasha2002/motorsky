@@ -471,11 +471,15 @@ h2 {
   inset: 0;
   z-index: 10000;
   display: none;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 24px;
   overflow-y: auto;
   isolation: isolate;
+}
+
+.popap-search-block {
+  align-items: flex-start !important;
 }
 
 .popup-overlay.is-open {

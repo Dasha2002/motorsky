@@ -73,9 +73,9 @@
             <p class="mobile-menu__label">Электродвигатели BLDC</p>
 
             <a href="/product-page.php">2807—1300 KV</a>
-            <a href="/product-page">2810—1500 KV</a>
-            <a href="/product-page">3115—900 KV</a>
-            <a href="/product-page">3120—500 KV</a>
+            <a href="/product-page.php">2810—1500 KV</a>
+            <a href="/product-page.php">3115—900 KV</a>
+            <a href="/product-page.php">3120—500 KV</a>
 
             <a href="/servo.php">Серводвигатели для роботов и станков с ЧПУ</a>
             <a href="/traction.php">Тяговые электродвигатели для наземного транспорта</a>
@@ -102,7 +102,7 @@
 
 
 
-<div class="popup-overlay" data-popup-id="search">
+<div class="popup-overlay popap-search-block" data-popup-id="search">
     <div class="popup-overlay__bg"></div>
     <div class="popup-card popup-card--search">
         <div class="popup-search-input">
@@ -114,72 +114,6 @@
                 </svg>
             </button>
         </div>
-        <ul class="popup-search-results">
-            <li><a href="/product-2807.php" data-search-title="Электродвигатель STAR 2807—1300 KV" data-search-group="Электродвигатели BLDC">
-                    <div>
-                        <div>Электродвигатель STAR 2807—1300 KV</div><small>Электродвигатели BLDC</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li><a href="/product-2810.php" data-search-title="Электродвигатель STAR 2810—1500 KV" data-search-group="Электродвигатели BLDC">
-                    <div>
-                        <div>Электродвигатель STAR 2810—1500 KV</div><small>Электродвигатели BLDC</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li><a href="/product-3115.php" data-search-title="Электродвигатель STAR 3115—900 KV" data-search-group="Электродвигатели BLDC">
-                    <div>
-                        <div>Электродвигатель STAR 3115—900 KV</div><small>Электродвигатели BLDC</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li><a href="/product-3120.php" data-search-title="Электродвигатель STAR 3120—500 KV" data-search-group="Электродвигатели BLDC">
-                    <div>
-                        <div>Электродвигатель STAR 3120—500 KV</div><small>Электродвигатели BLDC</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li><a href="/servo.php" data-search-title="Серводвигатели для роботов и станков с ЧПУ" data-search-group="Специальные">
-                    <div>
-                        <div>Серводвигатели для роботов и станков с ЧПУ</div><small>Специальные</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li><a href="/traction.php" data-search-title="Тяговые электродвигатели для наземного транспорта" data-search-group="Специальные">
-                    <div>
-                        <div>Тяговые электродвигатели для наземного транспорта</div><small>Специальные</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li><a href="/production.php" data-search-title="Производство" data-search-group="О компании">
-                    <div>
-                        <div>Производство</div><small>О компании</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li><a href="/#contacts" data-search-title="Контакты" data-search-group="О компании">
-                    <div>
-                        <div>Контакты</div><small>О компании</small>
-                    </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a></li>
-            <li class="popup-search-empty is-hidden" style="padding:32px;text-align:center;color:rgba(255,255,255,0.6)">Ничего не найдено</li>
-        </ul>
+        
     </div>
 </div>

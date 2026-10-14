@@ -34,7 +34,7 @@
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">2520</span></li>
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">HQ 7*4*3</span></li>
                     </ul>
-                    <a class="bldc-card__link" href="/product-2807.php">
+                    <a class="bldc-card__link" href="product-page.php">
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
@@ -55,7 +55,7 @@
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">2329</span></li>
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">HQ 6*3,5*3</span></li>
                     </ul>
-                    <a class="bldc-card__link" href="/product-2807.php">
+                    <a class="bldc-card__link" href="product-page.php">
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
@@ -76,7 +76,7 @@
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">3802</span></li>
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">HQ 9*5*3</span></li>
                     </ul>
-                    <a class="bldc-card__link" href="/product-2807.php">
+                    <a class="bldc-card__link" href="product-page.php">
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
@@ -97,7 +97,7 @@
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">6719</span></li>
                         <li class="bldc-card__spec"><span class="bldc-card__spec-value">HQ 10*5*3</span></li>
                     </ul>
-                    <a class="bldc-card__link" href="/product-2807.php">
+                    <a class="bldc-card__link" href="product-page.php">
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
