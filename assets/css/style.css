@@ -567,14 +567,14 @@ position: absolute;
     top: 0;
     left: 50%;
     width: 100vw;
-    height: 200vh;
-    transform: translateX(-50%) perspective(1100px) rotateX(302deg);
+    height: 300vh;
+    transform: translateX(-50%) perspective(1100px) rotateX(297deg);
     transform-origin: center top;
     pointer-events: none;
     z-index: 1;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.18) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 7px, transparent 1px);
-    background-size: 80px 80px;
     filter: blur(1px);
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.271) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.222) 2px, transparent 1px);
+    background-size: 100px 40px;
     -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 5%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, transparent 75%);
     mask-image: radial-gradient(ellipse 75% 55% at 50% 5%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, transparent 75%);
 }
@@ -1236,24 +1236,11 @@ position: absolute;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  
 }
-.arrow-circle img {
-  transition: opacity .2s ease;
+.arrow-bldc-text:hover {
+  color: #10abe3;
 }
-.arrow-circle img.hover {
-  position: absolute;
-  opacity: 0;
-  filter: brightness(0) invert(1);
-}
-.arrow-circle:hover {
-  background: #10ABE3;
-  color: #ffffff;
-  border-color: #10ABE3;
-}
-.arrow-circle:hover img.default { opacity: 0; }
-.arrow-circle:hover img.hover { opacity: 1; }
-
 
 
 
@@ -2363,28 +2350,20 @@ display: grid;
 
 /* Сетка — копия из hero */
 .hero-product__grid {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 100vw;
-  height: 200vh;
-  transform: translateX(-50%) perspective(1100px) rotateX(291deg);
-  transform-origin: center top;
-  pointer-events: none;
-  z-index: 1;
-  background-image:
-    linear-gradient(to right,  rgba(255, 255, 255, 0.18) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 7px, transparent 1px);
-  background-size: 80px 80px;
-  filter: blur(1px);
-  -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 5%,
-                                       rgba(0, 0, 0, 0.95) 0%,
-                                       rgba(0, 0, 0, 0.6)  35%,
-                                       transparent 75%);
-          mask-image: radial-gradient(ellipse 75% 55% at 50% 5%,
-                                       rgba(0, 0, 0, 0.95) 0%,
-                                       rgba(0, 0, 0, 0.6)  35%,
-                                       transparent 75%);
+position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 300vh;
+    transform: translateX(-50%) perspective(1100px) rotateX(297deg);
+    transform-origin: center top;
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(1px);
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.271) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.222) 2px, transparent 1px);
+    background-size: 100px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 5%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, transparent 75%);
+    mask-image: radial-gradient(ellipse 75% 55% at 50% 5%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, transparent 75%);
 }
 
 /* Голубой glow — копия из hero */
@@ -2734,7 +2713,7 @@ display: grid;
 }
 
 /* Позиции бейджей (как на скриншоте оригинала) */
-.pspec__badge--1 { left: 19%; top: 60%; }  /* Вал */
+.pspec__badge--1 { left: 19%; top: 58%; }  /* Вал */
 .pspec__badge--2 { left: 39%; top: 58%; }  /* Колокол */
 .pspec__badge--3 { left: 58%; top: 58%; }  /* Магниты */
 .pspec__badge--4 { left: 85%; top: 43%; }  /* Провод (чуть выше) */
@@ -3272,28 +3251,20 @@ display: grid;
 
 /* Сетка (копия из hero-product) */
 .shero__grid {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 100vw;
-  height: 200vh;
-  transform: translateX(-50%) perspective(1100px) rotateX(302deg);
-  transform-origin: center top;
-  pointer-events: none;
-  z-index: 1;
-  background-image:
-    linear-gradient(to right,  rgba(255, 255, 255, 0.18) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 7px, transparent 1px);
-  background-size: 80px 80px;
-  filter: blur(1px);
-  -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 5%,
-                                       rgba(0, 0, 0, 0.95) 0%,
-                                       rgba(0, 0, 0, 0.6)  35%,
-                                       transparent 75%);
-          mask-image: radial-gradient(ellipse 75% 55% at 50% 5%,
-                                       rgba(0, 0, 0, 0.95) 0%,
-                                       rgba(0, 0, 0, 0.6)  35%,
-                                       transparent 75%);
+position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 300vh;
+    transform: translateX(-50%) perspective(1100px) rotateX(297deg);
+    transform-origin: center top;
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(1px);
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.271) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.222) 2px, transparent 1px);
+    background-size: 100px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 5%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, transparent 75%);
+    mask-image: radial-gradient(ellipse 75% 55% at 50% 5%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, transparent 75%);
 }
 
 /* Голубой glow (копия) */

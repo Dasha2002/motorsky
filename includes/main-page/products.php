@@ -38,7 +38,7 @@
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
-                        <span>подробно</span>
+                        <span class="arrow-bldc-text">подробно</span>
                     </a>
                 </article>
 
@@ -59,7 +59,7 @@
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
-                        <span>подробно</span>
+                        <span class="arrow-bldc-text">подробно</span>
                     </a>
                 </article>
 
@@ -80,7 +80,7 @@
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
-                        <span>подробно</span>
+                        <span class="arrow-bldc-text">подробно</span>
                     </a>
                 </article>
 
@@ -101,7 +101,7 @@
                         <span class="arrow-circle">
                             <img class="default" src="/assets/img/2-arrow1.svg" alt="">
                         </span>
-                        <span>подробно</span>
+                        <span class="arrow-bldc-text">подробно</span>
                     </a>
                 </article>
             </div>
