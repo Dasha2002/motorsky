@@ -27,6 +27,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::selection { background: #0bafe684; color: #ffffff; }
+
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
@@ -205,7 +208,7 @@ h2 {
 
 .group-menu {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
+  grid-template-columns: 1fr  !important;
   width: 270px;
   padding-bottom: 20px;
 }
@@ -824,21 +827,28 @@ position: absolute;
 /* Каждое поле — только нижняя граница */
 .popup-form__field {
   position: relative;
-  border-bottom: 1px solid #ffffff;
 }
 .popup-form__field input,
 .popup-form__field textarea {
   width: 100%;
-  background: transparent;
+  background: #0c9dcd53;
+  border-radius: 10px;
   border: 0;
   outline: none;
   color: #ffffff;
   font-family: 'Manrope', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  padding: 18px 0;
+  padding: 18px 10px;
   resize: none;
 }
+
+.popup-form__field input:hover,
+.popup-form__field textarea:hover {
+  background: #1ec7ff88;
+  border: 1px solid #10ABE3;
+}
+
 .popup-form__field input::placeholder,
 .popup-form__field textarea::placeholder {
   color: #ffffff;
@@ -865,7 +875,7 @@ position: absolute;
   flex-shrink: 0;
 }
 .popup-form__field--phone input {
-  padding-left: 0;
+
 }
 
 /* Textarea чуть короче */
@@ -932,6 +942,7 @@ position: absolute;
   .popup-form { padding: 0 24px 32px; }
   .popup-success { padding: 60px 24px; }
   .popup-form__submit { padding: 16px; font-size: 15px; }
+  .popup-close {right: 0;}
 }
 
 /* ============ Поиск (без изменений, но совместимость) ============ */
@@ -1485,6 +1496,7 @@ position: absolute;
   background: #fff;
   border-radius: 20px;
   overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.2);
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
   transition: box-shadow .2s ease;
   text-decoration: none;
@@ -1655,7 +1667,7 @@ display: grid;
     flex-wrap: wrap;
     gap: 5px;
     width: 250px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     margin-bottom: 14px;
 }
 .site-footer__bldc-row a { color: var(--ms-cyan); font-size: 16px; }
@@ -2426,10 +2438,11 @@ position: absolute;
 }
 
 .hero-product__bullets {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 50%;
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  gap: 5%;
   margin: 0 0 40px;
   padding: 0;
   list-style: none;
@@ -2932,7 +2945,7 @@ position: absolute;
 .group-pspec {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 80px;
 }
 
 .pspec__features {
@@ -3018,7 +3031,7 @@ position: absolute;
     padding: 28px 24px;
   }
   .pspec__col { gap: 0; }
-  .pspec__row { font-size: 14px; padding: 8px 0; }
+  .pspec__row { font-size: 14px; padding: 8px 30px; }
   .table-characterristic { width: 90%; }
 
   /* Особенности — в колонку */
@@ -3090,7 +3103,7 @@ position: absolute;
   .pspec__callout p { font-size: 12px; }
 
   .pspec__table { padding: 20px 16px; }
-  .pspec__row { padding: 6px 0; }
+  .pspec__row { padding: 6px 10px; }
   .pspec__row span:first-child { font-size: 11px; }
   .pspec__row span:last-child { font-size: 14px; }
   .table-characterristic { width: 100%; }
@@ -3829,7 +3842,7 @@ position: absolute;
   .bldc-card__spec { font-size: 11px; }
   .bldc-card__link { font-size: 13px; }
   .arrow-circle { width: 28px; height: 28px; }
-  .arrow-circle img { width: 12px; height: 12px; }
+
 
   /* ABOUT */
   .about { padding: 60px 0; }
@@ -3840,6 +3853,9 @@ position: absolute;
   .about__cards { margin-top: 40px; }
   .about-card { padding: 18px; min-height: 120px; }
   .about-card p { font-size: 12px; }
+
+
+  .contacts {padding: 40px 0;}
 }
 
 /* =========================================================
@@ -3901,7 +3917,6 @@ position: absolute;
   .bldc-card__spec { font-size: 11px; }
   .bldc-card__link { font-size: 12px; gap: 6px; }
   .arrow-circle { width: 26px; height: 26px; }
-  .arrow-circle img { width: 11px; height: 11px; }
   .hero__glow {width: 120%;}
 
   /* ABOUT */

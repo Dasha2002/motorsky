@@ -1,0 +1,22 @@
+/* WordPress integration; the original layout lives in style.css. */
+.screen-reader-text { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.skip-link:focus { clip: auto; width: auto; height: auto; margin: 10px; padding: 12px 20px; background: #fff; color: #021a22; z-index: 100000; }
+body.admin-bar .site-header { top: 62px; }
+#main-content > .narticle { padding-top: 160px; }
+.motorsky-product-image { width: 100%; height: auto; object-fit: contain; }
+.motorsky-product-summary { color: inherit; }
+.motorsky-search-form { display: flex; gap: 12px; align-items: center; flex: 1; min-width: 0; }
+.motorsky-search-form input { min-width: 0; width: 100%; padding: 16px; border: 1px solid var(--ms-line); border-radius: 12px; font: inherit; }
+.motorsky-search-form .btn-ms { padding: 16px 22px; }
+.motorsky-post-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 32px 0; }
+.motorsky-post-list .news-card { width: auto; }
+.narticle__content ul { list-style: disc; padding-left: 1.5em; }
+.narticle__content a, .navigation a { text-decoration: underline; }
+.narticle__content .alignwide { width: 100%; }
+.narticle__content figure { max-width: 100%; margin: 24px 0; }
+.motorsky-honeypot { position: absolute; left: -10000px; }
+.popup-form__error { color: #fff; margin: 0 0 12px; }
+.popup-form__submit:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 1024px) { body.admin-bar .site-header { top: 32px; } }
+@media (max-width: 782px) { body.admin-bar .site-header { top: 46px; } .motorsky-post-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { #wpadminbar { position: fixed; } #main-content > .narticle { padding-top: 120px; } .motorsky-post-list { grid-template-columns: 1fr; } }

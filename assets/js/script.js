@@ -1,6 +1,24 @@
 (function () {
   'use strict';
 
+  var pageScrollLocked = false;
+  var savedBodyOverflow = '';
+  var savedHtmlOverflow = '';
+  function syncPageScroll() {
+    var locked = !!document.querySelector('.popup-overlay.is-open, .mobile-menu.is-open');
+    if (locked === pageScrollLocked) return;
+    if (locked) {
+      savedBodyOverflow = document.body.style.overflow;
+      savedHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = savedBodyOverflow;
+      document.documentElement.style.overflow = savedHtmlOverflow;
+    }
+    pageScrollLocked = locked;
+  }
+
   function initHeaderScroll() {
     var header = document.querySelector('.site-header');
     if (!header) return;
@@ -72,17 +90,17 @@
   }
 
   function initPopups() {
+    var activeTrigger = null;
     function getOpenPopups() {
       return document.querySelectorAll('.popup-overlay.is-open');
     }
 
     function syncBodyScroll() {
-      var mobileMenu = document.querySelector('.mobile-menu.is-open');
-      document.body.style.overflow =
-        getOpenPopups().length || mobileMenu ? 'hidden' : '';
+      syncPageScroll();
     }
 
-    function openPopup(id) {
+    function openPopup(id, trigger) {
+      activeTrigger = trigger || null;
       var popup = document.querySelector(
         '.popup-overlay[data-popup-id="' + id + '"]'
       );
@@ -90,6 +108,24 @@
       if (!popup) {
         console.warn('Не найдено модальное окно:', id);
         return;
+      }
+
+      var form = popup.querySelector('.popup-form');
+      if (form) {
+        form.style.display = '';
+        var success = popup.querySelector('.popup-success');
+        if (success) success.classList.add('is-hidden');
+        var icon = popup.querySelector('.popup-icon');
+        if (icon) icon.style.display = '';
+        var error = form.querySelector('.popup-form__error');
+        if (error) error.hidden = true;
+        var model = form.querySelector('[name="ModelId"]');
+        if (model) model.value = trigger ? trigger.getAttribute('data-product-id') || '' : '';
+        var modelName = form.querySelector('[name="Model"]');
+        var selectedModel = form.querySelector('[data-selected-model]');
+        var title = trigger ? trigger.getAttribute('data-product-name') || '' : '';
+        if (modelName) modelName.value = title;
+        if (selectedModel) selectedModel.textContent = title;
       }
 
       getOpenPopups().forEach(function (openItem) {
@@ -101,15 +137,16 @@
 
       popup.classList.add('is-open');
       popup.setAttribute('aria-hidden', 'false');
+      popup.scrollTop = 0;
       syncBodyScroll();
 
       var firstInput = popup.querySelector(
-        'input:not([type="hidden"]), textarea'
+        'input:not([type="hidden"]):not([tabindex="-1"]), textarea'
       );
 
       if (firstInput) {
         window.setTimeout(function () {
-          firstInput.focus();
+          firstInput.focus({ preventScroll: true });
         }, 100);
       }
     }
@@ -120,6 +157,7 @@
       popup.classList.remove('is-open');
       popup.setAttribute('aria-hidden', 'true');
       syncBodyScroll();
+      if (!getOpenPopups().length && activeTrigger) activeTrigger.focus({ preventScroll: true });
     }
 
     document.addEventListener('click', function (event) {
@@ -138,7 +176,7 @@
 
       if (trigger) {
         event.preventDefault();
-        openPopup(trigger.getAttribute('data-popup'));
+        openPopup(trigger.getAttribute('data-popup'), trigger);
         return;
       }
 
@@ -172,13 +210,12 @@
 
     function openMenu() {
       menu.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+      syncPageScroll();
     }
 
     function closeMenu() {
       menu.classList.remove('is-open');
-      document.body.style.overflow =
-        document.querySelector('.popup-overlay.is-open') ? 'hidden' : '';
+      syncPageScroll();
     }
 
     trigger.addEventListener('click', function (event) {
@@ -207,6 +244,13 @@
 
       event.preventDefault();
 
+      var emailField = form.querySelector('[name="Email"]');
+      var phoneField = form.querySelector('[name="Phone"]');
+      if (emailField && phoneField) {
+        var phoneDigits = phoneField.value.replace(/^\s*\+7/, '').replace(/\D/g, '');
+        emailField.setCustomValidity(!emailField.value.trim() && !phoneDigits ? 'Укажите телефон или email.' : '');
+      }
+
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
@@ -215,39 +259,81 @@
       var card = form.closest('.popup-card');
       if (!card) return;
 
-      form.style.display = 'none';
+      var submit = form.querySelector('[type="submit"]');
+      var error = form.querySelector('.popup-form__error');
+      if (submit && submit.disabled) return;
+      if (submit) submit.disabled = true;
+      if (error) error.hidden = true;
 
-      var icon = card.querySelector('.popup-icon');
-      if (icon) icon.style.display = 'none';
-
-      var success = card.querySelector('.popup-success');
-      if (success) success.classList.remove('is-hidden');
+      var request = new FormData(form);
+      var nonceRequest = new FormData();
+      nonceRequest.set('action', 'motorsky_lead_nonce');
+      fetch(form.action, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: nonceRequest
+      })
+        .then(function (response) { return response.json(); })
+        .then(function (result) {
+          if (!result.success || !result.data || !result.data.nonce) throw new Error('Не удалось подготовить форму. Обновите страницу.');
+          request.set('motorsky_nonce', result.data.nonce);
+          return fetch(form.action, {method: 'POST', credentials: 'same-origin', body: request});
+        })
+        .then(function (response) { return response.json(); })
+        .then(function (result) {
+          if (!result.success) {
+            throw new Error(result.data && result.data.message ? result.data.message : 'Не удалось отправить сообщение.');
+          }
+          document.dispatchEvent(new CustomEvent('motorsky:lead-sent', {detail: {formType: request.get('FormType'), productId: request.get('ModelId')}}));
+          form.reset();
+          form.style.display = 'none';
+          var icon = card.querySelector('.popup-icon');
+          if (icon) icon.style.display = 'none';
+          var success = card.querySelector('.popup-success');
+          if (success) success.classList.remove('is-hidden');
+        })
+        .catch(function (failure) {
+          if (error) {
+            error.textContent = failure.message || 'Ошибка соединения. Попробуйте позже.';
+            error.hidden = false;
+          }
+        })
+        .then(function () { if (submit) submit.disabled = false; });
     });
   }
 
   function initPhoneMask() {
+    function isPhone(input) {
+      return input instanceof HTMLInputElement && input.closest('.popup-form__field--phone');
+    }
+    function formatPhone(input) {
+      var explicitPrefix = /^\s*\+7/.test(input.value);
+      var value = input.value.replace(/\D/g, '');
+      if (explicitPrefix || (value.length === 11 && (value[0] === '7' || value[0] === '8'))) value = value.slice(1);
+      value = value.slice(0, 10);
+      var formatted = '+7 ';
+      if (value.length > 0) formatted += '(' + value.slice(0, 3);
+      if (value.length >= 4) formatted += ') ' + value.slice(3, 6);
+      if (value.length >= 7) formatted += '-' + value.slice(6, 8);
+      if (value.length >= 9) formatted += '-' + value.slice(8, 10);
+      input.value = formatted;
+    }
+    document.addEventListener('focusin', function (event) {
+      if (isPhone(event.target)) formatPhone(event.target);
+    });
+    document.addEventListener('blur', function (event) {
+      if (isPhone(event.target) && /^\+7\s*$/.test(event.target.value)) event.target.value = '';
+    }, true);
     document.addEventListener('input', function (event) {
       var input = event.target;
 
       if (!(input instanceof HTMLInputElement)) return;
-      if (!input.closest('.popup-form__field--phone')) return;
-
-      var value = input.value.replace(/\D/g, '');
-
-      if (value.startsWith('7') || value.startsWith('8')) {
-        value = value.slice(1);
+      var form = input.closest('.popup-form');
+      if (form) {
+        var email = form.querySelector('[name="Email"]');
+        if (email) email.setCustomValidity('');
       }
-
-      value = value.slice(0, 10);
-
-      var formatted = '';
-
-      if (value.length > 0) formatted = '(' + value.slice(0, 3);
-      if (value.length >= 4) formatted += ') ' + value.slice(3, 6);
-      if (value.length >= 7) formatted += '-' + value.slice(6, 8);
-      if (value.length >= 9) formatted += '-' + value.slice(8, 10);
-
-      input.value = formatted;
+      if (isPhone(input)) formatPhone(input);
     });
   }
 
@@ -380,6 +466,7 @@ function initProductSwiper() {
 
   var nextButton = swiperEl.querySelector('.hero-product-swiper-next');
   var prevButton = swiperEl.querySelector('.hero-product-swiper-prev');
+  var slideCount = swiperEl.querySelectorAll('.swiper-slide').length;
 
   var swiper = new window.Swiper(swiperEl, {
     direction: 'horizontal',
@@ -387,14 +474,15 @@ function initProductSwiper() {
     slidesPerGroup: 1,
     spaceBetween: 0,
     initialSlide: 0,
-    loop: true,
+    loop: slideCount > 1,
+    watchOverflow: true,
     effect: 'slide',
     speed: 500,
-    autoplay: {
+    autoplay: slideCount > 1 ? {
   delay: 1000,
   disableOnInteraction: false,
   pauseOnMouseEnter: true
-},
+} : false,
     allowTouchMove: true,
     observer: true,
     observeParents: true,
@@ -411,20 +499,6 @@ function initProductSwiper() {
       }
     }
   });
-
-  if (nextButton) {
-    nextButton.onclick = function (event) {
-      event.preventDefault();
-      swiper.slideNext();
-    };
-  }
-
-  if (prevButton) {
-    prevButton.onclick = function (event) {
-      event.preventDefault();
-      swiper.slidePrev();
-    };
-  }
 
   swiper.update();
 }
@@ -471,6 +545,9 @@ function initProductSwiper() {
     initSliders();
     initProductSwiper();
     initSchemasSwiper();
+    var schemaBreakpoint = window.matchMedia('(max-width: 1024px)');
+    if (schemaBreakpoint.addEventListener) schemaBreakpoint.addEventListener('change', initSchemasSwiper);
+    else if (schemaBreakpoint.addListener) schemaBreakpoint.addListener(initSchemasSwiper);
   }
 
   if (document.readyState === 'loading') {

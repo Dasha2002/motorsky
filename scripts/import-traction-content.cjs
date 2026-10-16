@@ -1,0 +1,16 @@
+const fs=require('node:fs');
+const h=fs.readFileSync('.preview/traction-source.html','utf8');
+const decode=s=>s.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,'\u00a0').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"').trim();
+const texts=[...h.matchAll(/<div[^>]*class='tn-atom'[^>]*>([\s\S]*?)<\/div>/g)].map(m=>decode(m[1]));
+const pick=start=>{const t=texts.find(t=>t.startsWith(start)); if(!t)throw Error(start);return t;};
+const data={hero_accent:'Тяговые электродвигатели',hero_title:'для наземного транспорта',hero_description:pick('Тяговые электродвигатели\u00a0—'),hero_image:'https://static.tildacdn.com/tild6339-6666-4133-b636-393161636236/traction.png',summary:pick('Современные тяговые'),overview_title:pick('Основные характеристики'),advantages_title:pick('Преимущества перед ДВС'),application_title:pick('Применение')};
+['Высокий КПД','Компактность и легкость','Мощность и','Надежность и','Регенеративное','Тихая работа'].forEach((s,i)=>data['feature_'+(i+1)]=pick(s));
+['Экологичность','Меньше подвижных','Быстрый разгон','Снижение эксплуатационных'].forEach((s,i)=>data['advantage_'+(i+1)]=pick(s));
+['Асинхронные (AC)','Синхронные на','Вентильно-индукторные'].forEach((s,i)=>data['type_'+(i+1)+'_title']=pick(s));
+['надежные, неприхотливые','высокая эффективность','простая конструкция'].forEach((s,i)=>data['type_'+(i+1)+'_description']=pick(s));
+const icons=['https://static.tildacdn.com/tild3536-3466-4138-a536-383032333265/3-1.svg','https://static.tildacdn.com/tild6664-6265-4435-b030-636531373330/3-2.svg','https://static.tildacdn.com/tild6338-3633-4562-b066-303166323630/3-4.svg','https://static.tildacdn.com/tild3432-6537-4263-a131-643139623337/3-3.svg'];
+['Легковые и','Электробусы и','Спецтехника:','Железнодорожный транспорт:'].forEach((s,i)=>{data['application_'+(i+1)+'_title']=pick(s);data['application_'+(i+1)+'_image']=icons[i];});
+data.type_1_image='https://static.tildacdn.com/tild3334-3537-4532-a631-333262323730/2-1.svg';
+data.type_2_image='https://static.tildacdn.com/tild3062-3933-4264-b530-643034373336/2-1.svg';
+fs.writeFileSync('includes/traction-content.json',JSON.stringify(data,null,2)+'\n');
+console.log('Imported '+Object.keys(data).length+' exact source fields.');

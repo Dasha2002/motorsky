@@ -3,7 +3,7 @@
         <div class="narticle__inner">
             <!-- Шапка статьи -->
             <div class="narticle__head">
-                <a href="/#news" class="narticle__back">
+                <a href="<?php echo esc_url( home_url( '/#news' ) ); ?>" class="narticle__back">
                     <svg width="11" height="20" viewBox="0 0 11 20" fill="none">
                         <path d="M10 1L1 10L10 19" stroke="currentColor" stroke-width="2"></path>
                     </svg>
@@ -14,7 +14,7 @@
 
             <!-- Обложка статьи -->
             <div class="narticle__cover">
-                <img src="/assets/img/news-2.jpg" alt="Бизнес-план">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/news-2.jpg' ) ); ?>" alt="Бизнес-план">
             </div>
 
             <!-- Текст статьи -->

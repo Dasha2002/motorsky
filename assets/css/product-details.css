@@ -1,0 +1,25 @@
+/* Product additions only. Modal and existing user styles are intentionally untouched. */
+.hero-product .hero-product__copy > div { min-width: 0; flex: 1 1 50%; }
+.hero-product .ms-product-summary { max-width: 580px; margin: 0 28px 28px 0; }
+.hero-product .ms-product-summary .ms-product-stats { margin: 0; color: #fff; }
+.hero-product .ms-product-summary .ms-product-stats > div { border-color: rgba(255,255,255,.24); gap: 16px; }
+.hero-product .ms-product-summary .ms-product-stats dt { color: rgba(255,255,255,.8); }
+.hero-product .ms-product-summary .ms-product-stats dd { color: #fff; font-weight: 600; }
+nav.ms-product-neighbours { padding-top: 24px; padding-bottom: 60px; }
+nav.ms-product-neighbours a { overflow-wrap: anywhere; max-width: 100%; font-size: 30px; }
+
+@media (max-width: 700px) {
+  .hero-product .ms-product-summary { max-width: none; margin-right: 0; }
+  .hero-product .hero-product__copy { flex-direction: column; }
+  .hero-product .hero-product__bullets { width: 100%; margin-top: 30px; gap: 10px; }
+  nav.ms-product-neighbours { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 0; padding-bottom: 0;}
+  nav.ms-product-neighbours a {font-size: 18px; }
+}
+/* Keep technical descriptions readable on narrow screens. */
+@media (max-width: 600px) {
+  .pspec .pspec__intro, .pspec .pspec__callout p,
+  .pspec .pspec__feature-text, .pspec .pspec__recs-text { font-size: 13px; line-height: 1.6; }
+  .pspec .pspec__row span:first-child { font-size: 12px; line-height: 1.5; }
+  .pspec .pspec__row span:last-child { font-size: 13px; line-height: 1.5; }
+  .pspec .pspec__row span { min-width: 0; overflow-wrap: anywhere; }
+}

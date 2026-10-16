@@ -4,7 +4,7 @@
 
     <!-- Голубой полукруг — КАРТИНКА сверху по центру -->
     <div class="hero-product__glow">
-        <img src="/assets/img/hero_gradient.svg" alt="">
+        <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/hero_gradient.svg' ) ); ?>" alt="">
     </div>
 
     <!-- Правая колонка: СВАЙПЕР с картинками мотора -->
@@ -12,16 +12,16 @@
         <div class="swiper hero-product-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="/assets/img/e1-1.png" alt="Электродвигатель STAR 2807—1300 KV — 3D-рендер">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e1-1.png' ) ); ?>" alt="Электродвигатель STAR 2807—1300 KV — 3D-рендер">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/assets/img/e1-2.png" alt="Электродвигатель STAR 2807 — чертёж 1">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e1-2.png' ) ); ?>" alt="Электродвигатель STAR 2807 — чертёж 1">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/assets/img/e1-3.png" alt="Электродвигатель STAR 2807 — чертёж 2">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e1-3.png' ) ); ?>" alt="Электродвигатель STAR 2807 — чертёж 2">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/assets/img/e1-4.png" alt="Электродвигатель STAR 2807 — чертёж 3">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e1-4.png' ) ); ?>" alt="Электродвигатель STAR 2807 — чертёж 3">
                 </div>
             </div>
 

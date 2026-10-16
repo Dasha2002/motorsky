@@ -10,11 +10,11 @@
                 <p>Наше производство охватывает весь процесс: от проектирования, изготовления компонентов до многоуровневых испытаний готовых изделий.</p>
             </div>
         
-                <a href="/production-page.php" class="btn-ms">Подробнее</a>
+                <a href="<?php echo esc_url( motorsky_page_url( 'production-page.php', 'production' ) ); ?>" class="btn-ms">Подробнее</a>
             </div>
 
             <div class="about__photo">
-                <img src="/assets/img/factory.png" alt="Производственный цех Motorsky в Перми">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/factory.png' ) ); ?>" alt="Производственный цех Motorsky в Перми">
             </div>
         </div>
 

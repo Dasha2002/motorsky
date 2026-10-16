@@ -15,40 +15,40 @@
         <!-- Разнесённая схема с 6 выносками -->
         <!-- Разнесённая схема с 6 выносками -->
         <div class="pspec__exploded">
-            <img class="pspec__exploded-img" src="/assets/img/e2-3d.png" alt="Разнесённая схема электродвигателя STAR 2807">
+            <img class="pspec__exploded-img" src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-3d.png' ) ); ?>" alt="Разнесённая схема электродвигателя STAR 2807">
 
             <!-- Нумерация поверх картинки -->
-            <div class="pspec__badge pspec__badge--1"><img src="/assets/img/e2-n1.svg" alt="1"></div>
-            <div class="pspec__badge pspec__badge--2"><img src="/assets/img/e2-n2.svg" alt="2"></div>
-            <div class="pspec__badge pspec__badge--3"><img src="/assets/img/e2-n3.svg" alt="3"></div>
-            <div class="pspec__badge pspec__badge--4"><img src="/assets/img/e2-n4.svg" alt="4"></div>
-            <div class="pspec__badge pspec__badge--5"><img src="/assets/img/e2-n5.svg" alt="5"></div>
-            <div class="pspec__badge pspec__badge--6"><img src="/assets/img/e2-n6.svg" alt="6"></div>
+            <div class="pspec__badge pspec__badge--1"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n1.svg' ) ); ?>" alt="1"></div>
+            <div class="pspec__badge pspec__badge--2"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n2.svg' ) ); ?>" alt="2"></div>
+            <div class="pspec__badge pspec__badge--3"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n3.svg' ) ); ?>" alt="3"></div>
+            <div class="pspec__badge pspec__badge--4"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n4.svg' ) ); ?>" alt="4"></div>
+            <div class="pspec__badge pspec__badge--5"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n5.svg' ) ); ?>" alt="5"></div>
+            <div class="pspec__badge pspec__badge--6"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n6.svg' ) ); ?>" alt="6"></div>
         </div>
 
         <div class="pspec__callouts">
             <div class="pspec__callout">
-                <img src="/assets/img/e2-n1.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n1.svg' ) ); ?>" alt="">
                 <p>Вал из нержавеющей стали</p>
             </div>
             <div class="pspec__callout">
-                <img src="/assets/img/e2-n2.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n2.svg' ) ); ?>" alt="">
                 <p>Прочный анодированный колокол из алюминиевого сплава, оригинальный дизайн для экономии веса и быстрого отвода тепла</p>
             </div>
             <div class="pspec__callout">
-                <img src="/assets/img/e2-n3.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n3.svg' ) ); ?>" alt="">
                 <p>Термостойкие неодимовые магниты марки N52Н</p>
             </div>
             <div class="pspec__callout">
-                <img src="/assets/img/e2-n4.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n4.svg' ) ); ?>" alt="">
                 <p>Эмалированный высокотемпературный провод гарантирует высокий коэффициент заполнения пазов и низкое внутреннее сопротивление</p>
             </div>
             <div class="pspec__callout">
-                <img src="/assets/img/e2-n5.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n5.svg' ) ); ?>" alt="">
                 <p>Отечественные высокоскоростные подшипники</p>
             </div>
             <div class="pspec__callout">
-                <img src="/assets/img/e2-n6.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n6.svg' ) ); ?>" alt="">
                 <p>Высокочастотная электротехническая сталь обеспечивает минимальные электромагнитные потери</p>
             </div>
         </div>
@@ -57,13 +57,13 @@
         <div class="pspec__schemas swiper pspec-schemas-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide pspec__schema-slide">
-                    <img src="/assets/img/e2-shema-1.png" alt="Чертёж 1 — габариты STAR 2807">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-shema-1.png' ) ); ?>" alt="Чертёж 1 — габариты STAR 2807">
                 </div>
                 <div class="swiper-slide pspec__schema-slide">
-                    <img src="/assets/img/e2-shema-2.png" alt="Чертёж 2 — габариты STAR 2807">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-shema-2.png' ) ); ?>" alt="Чертёж 2 — габариты STAR 2807">
                 </div>
                 <div class="swiper-slide pspec__schema-slide">
-                    <img src="/assets/img/e2-shema-3.png" alt="Чертёж 3 — габариты STAR 2807">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-shema-3.png' ) ); ?>" alt="Чертёж 3 — габариты STAR 2807">
                 </div>
             </div>
             <!-- Стрелки (видны только на мобильных) -->
@@ -75,7 +75,7 @@
         <div class="pspec__table">
 
             <div class="hero-product__glow table-characterristic">
-                <img src="/assets/img/hero_gradient.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/hero_gradient.svg' ) ); ?>" alt="">
             </div>
 
             <div class="pspec__col">

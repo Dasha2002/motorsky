@@ -7,7 +7,7 @@
                 <a class="site-footer__phone" href="tel:+73422921461">+7 342 292-14-61</a>
                 <a class="site-footer__email" href="mailto:info@motorsky.ru">info@motorsky.ru</a>
                 <a class="site-footer__telegram" href="https://t.me/" target="_blank" rel="noreferrer" aria-label="Telegram">
-                    <img src="/assets/img/telegram.svg" alt="">
+                    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/telegram.svg' ) ); ?>" alt="">
                 </a>
             </div>
 
@@ -23,28 +23,26 @@
                 
                     <p class="site-footer__nav-sublabel">Электродвигатели BLDC:</p>
                 <div class="site-footer__bldc-row">
-                    <a href="/product-2807.php">2807—1300 KV</a>
-                    <a href="/product-2810.php">2810—1500 KV</a>
-                    <a href="/product-3115.php">3115—900 KV</a>
-                    <a href="/product-3120.php">3120—500 KV</a>
+
+            <?php motorsky_product_menu(); ?>
                 </div>
                 <div class="site-footer__link-list">
-                    <a href="/servo.php">Серводвигатели для роботов и станков с ЧПУ</a>
-                    <a href="/traction.php">Тяговые электродвигатели для наземного транспорта</a>
+                    <a href="<?php echo esc_url( motorsky_page_url( 'product-servo-page.php', 'servo' ) ); ?>">Серводвигатели для роботов и станков с ЧПУ</a>
+                    <a href="<?php echo esc_url( motorsky_page_url( 'traction-page.php', 'traction' ) ); ?>">Тяговые электродвигатели для наземного транспорта</a>
                     <span>Электродвигатели специального назначения</span>
                 </div>
                 <div class="site-footer__secondary-row">
-                    <a href="/#about">О компании</a>
-                    <a class="footer-a-black" href="/production.php">Производство</a>
-                    <a href="/#contacts">Контакты</a>
+                    <a href="<?php echo esc_url( home_url( '/#about' ) ); ?>">О компании</a>
+                    <a class="footer-a-black" href="<?php echo esc_url( motorsky_page_url( 'production-page.php', 'production' ) ); ?>">Производство</a>
+                    <a href="<?php echo esc_url( home_url( '/#contacts' ) ); ?>">Контакты</a>
                 </div>
             </div>
         </div>
 
         <div class="site-footer__bottom">
-            <p class="site-footer__copy">© 2026</p>
+            <p class="site-footer__copy">© <?php echo esc_html( wp_date( 'Y' ) ); ?></p>
             <a class="site-footer__dev" href="https://odddgtl.tilda.ws/" target="_blank" rel="noreferrer">
-                <img src="/assets/img/odddgtl.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/odddgtl.svg' ) ); ?>" alt="">
                 <span>разработано в odd. dgtl</span>
             </a>
         </div>

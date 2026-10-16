@@ -1,0 +1,23 @@
+<?php
+require __DIR__ . '/product-completion-smoke.php';
+verify( 'checkbox' === motorsky_product_fields()['show_on_home'][1], 'Home visibility is an admin checkbox' );
+verify( ! isset( motorsky_filter_fields()['show_on_home'] ), 'Home visibility is not a public catalogue filter' );
+$metadata[101] = array( '_motorsky_power' => '1150' );
+$_POST = array( 'motorsky_product_nonce' => 'fixture', 'motorsky' => array( 'show_on_home' => '1' ) );
+motorsky_save_product( 101 );
+verify( '1' === motorsky_product_value( 101, 'show_on_home' ), 'Checked checkbox persists' );
+$_POST['motorsky']['show_on_home'] = '0'; motorsky_save_product( 101 );
+verify( '0' === motorsky_product_value( 101, 'show_on_home' ) && '1150' === motorsky_product_value( 101, 'power' ), 'Unchecking changes only homepage visibility' );
+$can_edit = false; $_POST['motorsky']['show_on_home'] = '1'; motorsky_save_product( 101 );
+verify( '0' === motorsky_product_value( 101, 'show_on_home' ), 'Home flag save permission checked' ); $can_edit = true;
+verify( '' === motorsky_product_value( 102, 'show_on_home' ), 'Existing unconfigured products are unchecked' );
+$fixture_queries = array();
+ob_start(); include $root . '/includes/main-page/products.php'; $home = ob_get_clean();
+$query = end( $fixture_queries );
+verify( 'publish' === $query['post_status'], 'Only published products appear at home' );
+verify( -1 === $query['posts_per_page'], 'All selected products included without six-product cap' );
+verify( '_motorsky_show_on_home' === $query['meta_query'][0]['key'] && '1' === $query['meta_query'][0]['value'], 'Homepage requires an explicit checked flag' );
+verify( false === strpos( $home, 'bldc-card' ) && false === strpos( $home, 'STAR' ), 'No static products leak onto home when none selected' );
+verify( false !== strpos( $home, 'Каталог двигателей' ), 'Catalogue link remains available without selected products' );
+verify( array() === motorsky_catalog_meta_query( array() ), 'General catalogue has no homepage restriction' );
+echo "PASS homepage checkbox, unchecking, permissions, unrestricted selection count and catalogue separation\n";

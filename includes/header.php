@@ -1,8 +1,8 @@
 <header class="site-header" id="siteHeader">
     <div class="site-header__inner">
         <div class="site-header_blure">
-            <a href="/" class="site-header__logo" aria-label="Motorsky — на главную">
-                <img src="assets/img/hero-logo.svg" alt="Motorsky">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-header__logo" aria-label="Motorsky — на главную">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/hero-logo.svg' ) ); ?>" alt="Motorsky">
             </a>
 
             <nav>
@@ -19,25 +19,23 @@
 
                             <div class="site-nav__dropdown-column">
                                 <div class="site-footer__bldc-row group-menu">
-                                    <a href="/product-page.php">2807—1300 KV</a>
-                                    <a href="/product-page.php">2810—1500 KV</a>
-                                    <a href="/product-page.php">3115—900 KV</a>
-                                    <a href="/product-page.php">3120—500 KV</a>
+
+            <?php motorsky_product_menu(); ?>
                                 </div>
                             </div>
 
                             <div class="site-nav__dropdown-column">
                                 <ul>
-                                    <li><a href="product-servo-page.php">Серводвигатели для роботов и станков с ЧПУ</a></li>
-                                    <li><a href="product-servo-page.php">Тяговые электродвигатели для наземного транспорта</a></li>
+                                    <li><a href="<?php echo esc_url( motorsky_page_url( 'product-servo-page.php', 'servo' ) ); ?>">Серводвигатели для роботов и станков с ЧПУ</a></li>
+                                    <li><a href="<?php echo esc_url( motorsky_page_url( 'traction-page.php', 'traction' ) ); ?>">Тяговые электродвигатели для наземного транспорта</a></li>
                                     <li><span class="site-nav__dropdown-static">Электродвигатели специального назначения</span></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li><a href="/production-page.php">Производство</a></li>
-                    <li><a href="/#about">О компании</a></li>
-                    <li><a href="/#contacts">Контакты</a></li>
+                    <li><a href="<?php echo esc_url( motorsky_page_url( 'production-page.php', 'production' ) ); ?>">Производство</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/#about' ) ); ?>">О компании</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/#contacts' ) ); ?>">Контакты</a></li>
                 </ul>
             </nav>
         </div>
@@ -47,7 +45,7 @@
 
             <button class="btn-ms site-header__cta-desktop" data-popup="contact">Связаться</button>
             <button class="site-header__icon-btn" data-popup="search" aria-label="Поиск">
-                <img src="assets/img/hero-search-icon.svg" alt="">
+                <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/hero-search-icon.svg' ) ); ?>" alt="">
             </button>
             <button class="site-header__burger" data-mobile-menu-open aria-label="Меню">
                 <span></span><span></span><span></span>
@@ -61,7 +59,7 @@
     <div class="mobile-menu__overlay"></div>
     <aside class="mobile-menu__panel">
         <div class="mobile-menu__head">
-            <img src="/assets/img/logo.svg" alt="Motorsky">
+            <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/logo.svg' ) ); ?>" alt="Motorsky">
             <button class="mobile-menu__close" aria-label="Закрыть меню">
                 <svg viewBox="0 0 24 24" width="30" height="30" fill="none">
                     <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
@@ -72,20 +70,17 @@
         <div class="mobile-menu__group">
             <p class="mobile-menu__label">Электродвигатели BLDC</p>
 
-            <a href="/product-page.php">2807—1300 KV</a>
-            <a href="/product-page.php">2810—1500 KV</a>
-            <a href="/product-page.php">3115—900 KV</a>
-            <a href="/product-page.php">3120—500 KV</a>
+            <?php motorsky_product_menu(); ?>
 
-            <a href="/servo.php">Серводвигатели для роботов и станков с ЧПУ</a>
-            <a href="/traction.php">Тяговые электродвигатели для наземного транспорта</a>
+            <a href="<?php echo esc_url( motorsky_page_url( 'product-servo-page.php', 'servo' ) ); ?>">Серводвигатели для роботов и станков с ЧПУ</a>
+            <a href="<?php echo esc_url( motorsky_page_url( 'traction-page.php', 'traction' ) ); ?>">Тяговые электродвигатели для наземного транспорта</a>
             <span class="mobile-menu__static">Электродвигатели специального назначения</span>
         </div>
 
         <div class="mobile-menu__group">
-            <a href="/production.php">Производство</a>
-            <a href="/#about">О компании</a>
-            <a href="/#contacts">Контакты</a>
+            <a href="<?php echo esc_url( motorsky_page_url( 'production-page.php', 'production' ) ); ?>">Производство</a>
+            <a href="<?php echo esc_url( home_url( '/#about' ) ); ?>">О компании</a>
+            <a href="<?php echo esc_url( home_url( '/#contacts' ) ); ?>">Контакты</a>
         </div>
 
         <div class="mobile-menu__cta-row">
@@ -104,16 +99,16 @@
 
 <div class="popup-overlay popap-search-block" data-popup-id="search">
     <div class="popup-overlay__bg"></div>
-    <div class="popup-card popup-card--search">
-        <div class="popup-search-input">
-            <img src="assets/img/hero-search-icon.svg" alt="">
-            <input type="search" placeholder="Поиск по сайту…">
-            <button class="popup-close" aria-label="Закрыть">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-                    <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
-            </button>
+    <div class="popup-card popup-card--search" role="dialog" aria-modal="true" aria-labelledby="ms-search-title">
+        <div class="ms-search-header">
+            <h2 id="ms-search-title">Поиск по сайту</h2>
+            <button class="popup-close" type="button" aria-label="Закрыть поиск"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg></button>
         </div>
+        <div class="popup-search-input">
+            <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/hero-search-icon.svg' ) ); ?>" alt="">
+            <?php get_search_form(); ?>
+        </div>
+        <p class="ms-search-hint">Ищите двигатель по названию, серии, KV или параметрам. Например: 2807-1300.</p>
         
     </div>
 </div>

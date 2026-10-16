@@ -4,7 +4,7 @@
 
     <!-- Голубой полукруг — КАРТИНКА сверху по центру -->
     <div class="hero__glow">
-        <img src="assets/img/hero_gradient.svg" alt="">
+        <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/hero_gradient.svg' ) ); ?>" alt="">
     </div>
 
     <div class="hero__inner">
@@ -28,13 +28,17 @@
 
             <!-- CTA кнопка -->
             <div class="hero__cta">
-                <button class="btn-ms" data-popup="contact">Связаться</button>
+                <?php if ( is_front_page() || is_page_template( 'front-page.php' ) || ( is_page() && motorsky_is_homepage_post( get_queried_object() ) ) ) : ?>
+                <a class="btn-ms" href="<?php echo esc_url( motorsky_catalog_url() ); ?>" data-ms-event="catalog_open">Каталог двигателей</a>
+                <button class="btn-ms-outline" data-popup="selection" data-ms-event="selection_open">Подобрать двигатель</button>
+                <button class="btn-ms-outline" data-popup="development" data-ms-event="development_open">Разработать двигатель под ТЗ</button>
+                <?php else : ?><button class="btn-ms" data-popup="contact">Связаться</button><?php endif; ?>
             </div>
         </div>
 
         <!-- Мотор справа, диагональный ракурс -->
         <div class="hero__media">
-            <img src="/assets/img/hero-engine.png"
+            <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/hero-engine.png' ) ); ?>"
                  alt="Электродвигатель Motorsky — 3D-рендер разобранного мотора">
         </div>
     </div>

@@ -1,0 +1,9 @@
+.motorsky-gallery__list { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0; padding: 0; list-style: none; }
+.motorsky-gallery__item { width: 150px; margin: 0; padding: 10px; border: 1px solid #c3c4c7; border-radius: 6px; background: #fff; box-sizing: border-box; }
+.motorsky-gallery__item.is-dragging { opacity: .45; }
+.motorsky-gallery__handle { display: block; cursor: grab; padding: 4px 0 8px; color: #50575e; font-size: 12px; }
+.motorsky-gallery__item img { display: block; width: 128px; height: 100px; object-fit: contain; background: #f0f0f1; pointer-events: none; }
+.motorsky-gallery__title { display: block; margin: 8px 0; overflow-wrap: anywhere; font-size: 12px; }
+.motorsky-gallery__actions { display: flex; gap: 4px; flex-wrap: wrap; }
+.motorsky-gallery__actions .button { min-height: 28px; padding: 0 7px; }
+.motorsky-gallery__empty { color: #646970; }
