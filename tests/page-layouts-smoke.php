@@ -4,6 +4,10 @@ $queried = null;
 ob_start(); include $root . '/production-page.php'; $production = ob_get_clean();
 verify( 6 === substr_count( $production, 'class="production ms-production-section"' ), 'All six production sections' );
 verify( 6 === substr_count( $production, 'class="prod-card__photo-main"' ) && 8 === substr_count( $production, 'class="prod-card__photo-thumb"' ), 'All fourteen production photographs' );
+verify( 6 === substr_count( $production, 'data-production-gallery' ) && 14 === substr_count( $production, 'data-production-photo' ), 'Production photos are grouped by section and open as links' );
+foreach ( array( 1 => 3, 2 => 3, 3 => 3, 4 => 3, 5 => 1, 6 => 1 ) as $group => $count ) {
+    verify( $count === substr_count( $production, 'data-fancybox="production-' . $group . '"' ), 'Fancybox keeps production section ' . $group . ' separate' );
+}
 verify( false !== strpos( $production, 'Намоточная двухстанционная машина' ) && false !== strpos( $production, 'Финишные операции и сборка' ), 'Missing production stages restored' );
 verify( false !== strpos( $production, 'class="hero ms-production-hero"' ) && false !== strpos( $production, 'assets/img/hero-engine.png' ), 'Original large hero and motor restored' );
 verify( false !== strpos( $production, 'электродвигателей' ) && false !== strpos( $production, 'Обсудить производство' ), 'Production-specific hero copy' );
@@ -33,7 +37,8 @@ if ( getenv( 'MOTORSKY_RENDER_PREVIEW' ) ) {
         $html = str_replace( 'https://example.test/cms/wp-content/themes/motorsky/', '/', $html );
         if ( 'production' === $name ) { $html = str_replace( '<body class="home">', '<body class="motorsky-layout-hero">', $html ); }
         $html = str_replace( '</head>', '<link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="/assets/css/wordpress.css"><link rel="stylesheet" href="/assets/css/catalog.css"><link rel="stylesheet" href="/assets/css/product-details.css"><link rel="stylesheet" href="/assets/css/page-layouts.css"><link rel="stylesheet" href="/assets/css/search-controls.css"></head>', $html );
-        $html = str_replace( '</body>', '<script src="/assets/js/script.js"></script><script src="/assets/js/catalog.js"></script><script src="/assets/js/filter-selects.js"></script><script src="/assets/js/filter-sidebar.js"></script></body>', $html );
+        $html = str_replace( '</head>', '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.css"><link rel="stylesheet" href="/assets/css/production-lightbox.css"></head>', $html );
+        $html = str_replace( '</body>', '<script src="/assets/js/script.js"></script><script src="/assets/js/catalog.js"></script><script src="/assets/js/filter-selects.js"></script><script src="/assets/js/filter-sidebar.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.js"></script><script src="/assets/js/production-lightbox.js"></script></body>', $html );
         file_put_contents( $root . '/.preview/' . $name . '.html', $html );
     }
 }

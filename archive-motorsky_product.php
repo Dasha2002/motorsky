@@ -38,7 +38,7 @@
         <div class="ms-product-grid"><?php while ( have_posts() ) : the_post(); get_template_part( 'includes/product-card' ); endwhile; ?></div>
         <?php the_posts_pagination(); ?>
     <?php else : ?>
-        <div class="ms-empty" role="status"><h2>Двигатели не найдены</h2><p>Измените параметры или оставьте заявку — инженер поможет подобрать двигатель.</p><a data-filter-reset href="<?php echo esc_url( motorsky_catalog_url() ); ?>">Сбросить фильтры</a> <button class="btn-ms" data-popup="selection" data-ms-event="selection_open">Подобрать двигатель</button></div>
+        <div class="ms-empty" role="status"><h2>Двигатели не найдены</h2><p>Измените параметры или оставьте заявку — инженер поможет подобрать двигатель.</p> <div class="ms-empty-block-btn"><a data-filter-reset href="<?php echo esc_url( motorsky_catalog_url() ); ?>">Сбросить фильтры</a> <button class="btn-ms" data-popup="selection" data-ms-event="selection_open">Подобрать двигатель</button></div> </div>
     <?php endif; ?>
     </div></div>
 </div></section>

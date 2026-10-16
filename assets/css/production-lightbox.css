@@ -1,0 +1,20 @@
+.ms-production-section [data-production-photo] { display: block; cursor: zoom-in; }
+.ms-production-section [data-production-photo]:focus-visible { outline: 3px solid #10abe3; outline-offset: 4px; }
+/* One frame size for every section, irrespective of the source photo dimensions. */
+.ms-production-section .prod-card__photo-main { aspect-ratio: 4 / 3; }
+.ms-production-section .prod-card__photo-thumb { aspect-ratio: 4 / 3; }
+.ms-production-section [data-production-photo] img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.ms-production-fancybox { --f-thumb-width: 96px; --f-thumb-height: 72px; --f-thumb-border-radius: 4px; --f-thumb-selected-shadow: inset 0 0 0 2px #10abe3; }
+.ms-production-fancybox .fancybox__backdrop { background: rgba(12, 16, 20, .94); }
+.ms-production-fancybox .fancybox__slide { padding: 64px 72px 20px; }
+.ms-production-fancybox .f-panzoom__wrapper { width: auto; height: 100%; min-height: 0; max-width: 100% !important; max-height: 100% !important; }
+.ms-production-fancybox .f-panzoom__content.is-clone { width: 100%; height: 100%; object-fit: contain; }
+.ms-production-fancybox .f-caption { max-width: 960px; margin-inline: auto; padding: 16px 20px; font-size: 15px; line-height: 1.45; text-align: center; overflow-wrap: anywhere; }
+.ms-production-fancybox .f-button:focus-visible { outline: 2px solid #10abe3; outline-offset: 2px; }
+@media (max-width: 600px) {
+  .ms-production-fancybox { --f-thumb-width: 80px; --f-thumb-height: 60px; }
+  .ms-production-fancybox .fancybox__slide { padding: 60px 12px 12px; }
+  .ms-production-fancybox .f-panzoom__wrapper { width: 100%; height: auto; }
+  .ms-production-fancybox .f-caption { padding: 12px 8px; font-size: 13px; }
+}

@@ -24,6 +24,11 @@
 .ms-card-actions .btn-ms, .ms-card-actions .btn-ms-outline { padding: 15px 20px; font-size: 14px; }
 .ms-card-actions .btn-ms-outline { color: var(--ms-dark); border-color: #c3d6dc; }
 .ms-empty { border-radius: 24px; padding: 40px; background: var(--ms-cyan-soft); }
+.ms-empty-block-btn {display: flex; gap: 10%; align-items: center; }
+.ms-empty-block-btn a {
+    color: #00bbff;
+    text-decoration: underline;
+}
 .ms-text-button { color: #0277a0; text-decoration: underline; border: 0; background: none; padding: 0; font: inherit; }
 .ms-product-hero { display: block; padding: 150px 0 70px; min-height: 0; }
 .ms-product-hero__layout { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -83,8 +88,15 @@
 @media (min-width: 901px) { .ms-filters > summary { display: none; } }
 @media (max-width: 1024px) { .ms-product-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .ms-product-hero__layout { gap: 30px; } .ms-filter-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
 @media (max-width: 700px) { .ms-product-hero { padding: 120px 0 40px; } .ms-product-hero__layout { grid-template-columns: 1fr; } .ms-product-gallery { order: -1; } .ms-product-gallery > img { max-height: 300px; } .ms-materials { grid-template-columns: repeat(2,minmax(0,1fr)); } .ms-filter-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-@media (max-width: 560px) { .ms-catalog { padding-top: 120px; } .ms-product-grid, .ms-graph-grid, .ms-materials, .ms-filter-grid { grid-template-columns: 1fr; } .ms-product-card { padding: 10px; } .ms-filters { padding: 20px; } .ms-lead-card { max-height: calc(100dvh - 24px); } .ms-lead-card .popup-form { padding: 0 24px 24px; } .ms-lead-card > h2, .ms-lead-card > p { margin-left: 24px; margin-right: 24px; } .hero__cta { flex-direction: column; align-items: stretch; } .hero__cta .btn-ms, .hero__cta .btn-ms-outline { width: 100%; } }
-
+@media (max-width: 560px) { .ms-empty{padding: 15px;} .ms-catalog { padding-top: 120px; } .ms-product-grid, .ms-graph-grid, .ms-materials, .ms-filter-grid { grid-template-columns: 1fr; } .ms-product-card { padding: 10px; } .ms-filters { padding: 20px; } .ms-lead-card { max-height: calc(100dvh - 24px); } .ms-lead-card .popup-form { padding: 0 24px 24px; } .ms-lead-card > h2, .ms-lead-card > p { margin-left: 24px; margin-right: 24px; } .hero__cta { flex-direction: column; align-items: stretch; } .hero__cta .btn-ms, .hero__cta .btn-ms-outline { width: 100%; } .btn-ms {padding: 20px;} }
+@media (max-width: 500px) {
+    .btn-ms {padding: 15px;}
+    .ms-empty-block-btn {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
 /* Scroll the whole modal layer; the card itself never has an inner scrollbar. */
 html { scrollbar-gutter: stable; }
 .popup-overlay { z-index: 10000; align-items: flex-start; padding: 24px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; }
@@ -94,3 +106,4 @@ html { scrollbar-gutter: stable; }
 .ms-lead-card .popap-hero__glow { top: 0 !important; width: 100%; max-width: none; pointer-events: none; }
 .ms-lead-card > .popup-icon, .ms-lead-card > h2, .ms-lead-card > p, .ms-lead-card > .popup-form, .ms-lead-card > .popup-success { position: relative; z-index: 2; }
 @media (max-width: 560px) { .popup-overlay { padding: 12px; } }
+

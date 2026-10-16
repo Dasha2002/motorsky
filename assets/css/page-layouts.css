@@ -41,7 +41,7 @@
 .ms-filter-sidebar .ms-filter-grid label.is-active select, .ms-filter-dialog .ms-filter-grid label.is-active select { background-color: #edfaff; border-color: #69bdd9; }
 .ms-filter-sidebar .ms-card-actions, .ms-filter-dialog .ms-card-actions { margin-top: 22px; padding-top: 20px; border-top: 1px solid #dce8ec; gap: 6px; }
 .ms-filter-sidebar .ms-card-actions .btn-ms, .ms-filter-dialog .ms-card-actions .btn-ms { width: 100%; border-radius: 12px; box-shadow: 0 5px 14px rgba(16,171,227,.18); }
-.ms-filter-sidebar .ms-card-actions .btn-ms-outline, .ms-filter-dialog .ms-card-actions .btn-ms-outline { padding: 12px 6px 2px; border: 0; background: none; color: #6a818c; font-size: 12px; text-align: center; }
+.ms-filter-sidebar .ms-card-actions .btn-ms-outline, .ms-filter-dialog .ms-card-actions .btn-ms-outline { padding: 12px 6px 2px; border: 0; background: none; color: #10abe3; font-size: 12px; text-align: center; }
 .ms-filter-sidebar .ms-card-actions .btn-ms-outline:hover, .ms-filter-dialog .ms-card-actions .btn-ms-outline:hover { color: #087fa4; text-decoration: underline; }
 .ms-filter-title { font-size: 22px !important; line-height: 1.3; margin: 0 0 20px; }
 .ms-filter-sidebar .ms-filter-grid, .ms-filter-dialog .ms-filter-grid { grid-template-columns: 1fr; gap: 14px; margin: 0; }

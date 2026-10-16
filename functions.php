@@ -26,6 +26,12 @@ function motorsky_assets() {
     wp_enqueue_style( 'motorsky-product-details', get_theme_file_uri( 'assets/css/product-details.css' ), array( 'motorsky-catalog' ), filemtime( get_theme_file_path( 'assets/css/product-details.css' ) ) );
     wp_enqueue_style( 'motorsky-page-layouts', get_theme_file_uri( 'assets/css/page-layouts.css' ), array( 'motorsky-product-details' ), filemtime( get_theme_file_path( 'assets/css/page-layouts.css' ) ) );
     wp_enqueue_style( 'motorsky-search-controls', get_theme_file_uri( 'assets/css/search-controls.css' ), array( 'motorsky-page-layouts' ), filemtime( get_theme_file_path( 'assets/css/search-controls.css' ) ) );
+    if ( is_page_template( 'production-page.php' ) ) {
+        wp_enqueue_style( 'motorsky-fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.css', array(), '6.1.14' );
+        wp_enqueue_script( 'motorsky-fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.js', array(), '6.1.14', true );
+        wp_enqueue_style( 'motorsky-production-lightbox', get_theme_file_uri( 'assets/css/production-lightbox.css' ), array( 'motorsky-page-layouts', 'motorsky-fancybox' ), filemtime( get_theme_file_path( 'assets/css/production-lightbox.css' ) ) );
+        wp_enqueue_script( 'motorsky-production-lightbox', get_theme_file_uri( 'assets/js/production-lightbox.js' ), array( 'motorsky-fancybox' ), filemtime( get_theme_file_path( 'assets/js/production-lightbox.js' ) ), true );
+    }
     wp_enqueue_script( 'motorsky-filter-selects', get_theme_file_uri( 'assets/js/filter-selects.js' ), array( 'motorsky-catalog' ), filemtime( get_theme_file_path( 'assets/js/filter-selects.js' ) ), true );
     wp_enqueue_script( 'motorsky-filter-sidebar', get_theme_file_uri( 'assets/js/filter-sidebar.js' ), array( 'motorsky-filter-selects' ), filemtime( get_theme_file_path( 'assets/js/filter-sidebar.js' ) ), true );
     wp_enqueue_script( 'motorsky-catalog-live', get_theme_file_uri( 'assets/js/catalog-live.js' ), array( 'motorsky-filter-sidebar' ), filemtime( get_theme_file_path( 'assets/js/catalog-live.js' ) ), true );

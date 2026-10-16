@@ -8,14 +8,14 @@
   <div class="container">
     <h2 class="prod-card__title" id="production-title-<?php echo $ms_block; ?>"><?php echo nl2br( esc_html( $ms_title ), false ); ?></h2>
     <article class="prod-card production-card">
-      <div class="prod-card__left"><div class="prod-card__photos">
+      <div class="prod-card__left"><div class="prod-card__photos" data-production-gallery>
         <?php $ms_image = motorsky_production_value( $ms_prefix . 'image_1' ); if ( $ms_image ) : ?>
-        <div class="prod-card__photo-main"><img src="<?php echo esc_url( $ms_image ); ?>" alt="<?php echo esc_attr( $ms_title ); ?>" loading="lazy"></div>
+        <a class="prod-card__photo-main" data-production-photo data-fancybox="production-<?php echo $ms_block; ?>" data-caption="<?php echo esc_attr( esc_html( $ms_title ) ); ?>" href="<?php echo esc_url( $ms_image ); ?>" aria-label="<?php echo esc_attr( 'Увеличить: ' . $ms_title . ' — фото 1' ); ?>"><img src="<?php echo esc_url( $ms_image ); ?>" alt="<?php echo esc_attr( $ms_title ); ?>" loading="lazy"></a>
         <?php endif; ?>
         <?php if ( motorsky_production_value( $ms_prefix . 'image_2' ) || motorsky_production_value( $ms_prefix . 'image_3' ) ) : ?>
         <div class="prod-card__photo-thumbs">
           <?php for ( $ms_photo = 2; $ms_photo <= 3; $ms_photo++ ) : $ms_image = motorsky_production_value( $ms_prefix . 'image_' . $ms_photo ); if ( ! $ms_image ) { continue; } ?>
-          <div class="prod-card__photo-thumb"><img src="<?php echo esc_url( $ms_image ); ?>" alt="<?php echo esc_attr( $ms_title . ' — фото ' . $ms_photo ); ?>" loading="lazy"></div>
+          <a class="prod-card__photo-thumb" data-production-photo data-fancybox="production-<?php echo $ms_block; ?>" data-caption="<?php echo esc_attr( esc_html( $ms_title ) ); ?>" href="<?php echo esc_url( $ms_image ); ?>" aria-label="<?php echo esc_attr( 'Увеличить: ' . $ms_title . ' — фото ' . $ms_photo ); ?>"><img src="<?php echo esc_url( $ms_image ); ?>" alt="<?php echo esc_attr( $ms_title . ' — фото ' . $ms_photo ); ?>" loading="lazy"></a>
           <?php endfor; ?>
         </div>
         <?php endif; ?>
