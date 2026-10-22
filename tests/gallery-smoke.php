@@ -23,6 +23,31 @@ $_POST['motorsky'] = array( 'gallery' => '' ); $_POST['motorsky_gallery_changed'
 motorsky_save_product( 73 );
 verify( count( motorsky_layout_images( 73, 'gallery', array( 'e1-1.png' ), true ) ) === 1, 'Untouched legacy gallery retains its fallback' );
 $fixture_thumbnail_id = 0;
+$products[80] = (object) array( 'post_type' => 'motorsky_product', 'post_status' => 'publish', 'post_title' => 'Custom motor' );
+$current_product = 80;
+$points = array( array( 0, 100 ), array( 12.5, 23.4 ), array( 50, 50 ), array( 60, 40 ), array( 70, 30 ), array( 100, 0 ) );
+$_POST = array( 'motorsky_product_nonce' => 'fixture', 'motorsky' => array( 'exploded_image' => 'https://example.test/custom-scheme.png', 'exploded_points' => json_encode( $points ) ) );
+motorsky_save_product( 80 );
+verify( $points === motorsky_exploded_points( 80 ), 'Marker coordinates persist including edges and decimals' );
+$saved_points = $metadata[80]['_motorsky_exploded_points'];
+foreach ( array( '[]', '[[101,0],[0,0],[0,0],[0,0],[0,0],[0,0]]', '[["bad",0],[0,0],[0,0],[0,0],[0,0],[0,0]]', '[[1e999,0],[0,0],[0,0],[0,0],[0,0],[0,0]]', '{"bad":true}' ) as $invalid_points ) {
+    $_POST['motorsky']['exploded_points'] = $invalid_points;
+    motorsky_save_product( 80 );
+    verify( $saved_points === $metadata[80]['_motorsky_exploded_points'], 'Invalid marker coordinates preserve saved positions' );
+}
+$scheme = render_product_partial( 'includes/product-page/dynamic-characteristic.php' );
+verify( false !== strpos( $scheme, 'src="https://example.test/custom-scheme.png"' ) && false !== strpos( $scheme, 'style="left:12.5%;top:23.4%;"' ), 'Replacement scheme and saved marker positions render on product page' );
+ob_start(); motorsky_exploded_editor( 80 ); $points_editor = ob_get_clean();
+verify( 6 === substr_count( $points_editor, 'class="motorsky-points__marker"' ) && false === strpos( $points_editor, 'type="number"' ) && false !== strpos( $points_editor, 'motorsky-points__legend' ), 'Scheme editor has six movable markers and a legend without coordinate inputs' );
+$_POST['motorsky'] = array( 'exploded_points' => '' ); motorsky_save_product( 80 );
+verify( '' === motorsky_exploded_point_style( 80, 0 ), 'Clearing marker settings restores existing CSS positions' );
+foreach ( array( 'datasheet', 'drawing', 'step', 'tests' ) as $document ) { $metadata[80]['_motorsky_doc_' . $document] = 'https://example.test/' . $document . '.pdf'; }
+$resources = render_product_partial( 'includes/product-page/resources.php' );
+$documents_dom = new DOMDocument(); $documents_dom->loadHTML( '<?xml encoding="UTF-8">' . $resources ); $documents_xpath = new DOMXPath( $documents_dom );
+verify( 3 === $documents_xpath->query( '//a[@data-document][@target="_blank"][@rel="noopener noreferrer"][not(@download)]' )->length, 'Readable product documents open in a safe new tab instead of forcing a download' );
+verify( 1 === $documents_xpath->query( '//a[@data-document="doc_step"][@download]' )->length, 'STEP model remains downloadable' );
+$current_product = 70;
+echo "PASS editable exploded scheme, validated responsive markers and new-tab documents\n";
 echo "PASS ordered galleries, visual editor, existing data and explicit clearing\n";
 if ( getenv( 'MOTORSKY_RENDER_PREVIEW' ) ) {
     $metadata[70]['_motorsky_gallery'] = '1';

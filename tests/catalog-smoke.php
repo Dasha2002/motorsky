@@ -23,8 +23,16 @@ verify( '' === motorsky_clean_product_value( '-40', 'number' ), 'Positive-only n
 verify( '1,2' === motorsky_clean_product_value( '1,1,999,2', 'gallery' ), 'Gallery image validation' );
 verify( '' === motorsky_clean_product_value( 'javascript:alert(1)', 'url' ), 'Unsafe document URL rejected' );
 $metadata[7]['_motorsky_power'] = '1150';
+$metadata[7]['_motorsky_seo_title'] = 'Legacy SEO title';
+$metadata[7]['_motorsky_seo_description'] = 'Legacy SEO description';
+verify( ! isset( motorsky_product_fields()['seo_title'] ) && ! isset( motorsky_product_fields()['seo_description'] ), 'Product editor delegates SEO fields to plugin' );
 $_POST = array( 'motorsky_product_nonce' => 'fixture', 'motorsky' => array( 'current' => '45,2', 'mass' => '55±2', 'power' => 'invalid', 'wire' => '<b>Провод</b>', 'specs' => "Температура, °С | −40…+50\nВес, г | 55±2" ) );
 motorsky_save_product( 7 );
+verify( 'Legacy SEO title' === $metadata[7]['_motorsky_seo_title'] && 'Legacy SEO description' === $metadata[7]['_motorsky_seo_description'], 'Product save preserves legacy SEO metadata' );
+$queried = (object) array( 'post_type' => 'motorsky_product', 'ID' => 7 );
+$title_parts = array( 'title' => 'Product title', 'site' => 'MotorSky' );
+verify( $title_parts === motorsky_catalog_title( $title_parts ), 'Theme does not override product title with legacy SEO metadata' );
+$queried = null;
 verify( '45.2' === motorsky_product_value( 7, 'current' ) && '1150' === motorsky_product_value( 7, 'power' ), 'Save decimal and preserve previous value on invalid input' );
 verify( '55±2' === motorsky_product_value( 7, 'mass' ), 'Mass tolerance retained' );
 verify( 'Провод' === motorsky_product_value( 7, 'wire' ), 'Strip markup from parameters' );

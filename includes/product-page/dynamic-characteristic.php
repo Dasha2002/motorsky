@@ -27,12 +27,12 @@ $ms_callout_defaults = array( 'Вал из нержавеющей стали', '
             <?php if ( $ms_exploded ) : ?><img class="pspec__exploded-img" src="<?php echo esc_url( $ms_exploded ); ?>" alt="<?php echo esc_attr( 'Разнесённая схема ' . get_the_title() ); ?>"><?php endif; ?>
 
             <!-- Нумерация поверх картинки -->
-            <div class="pspec__badge pspec__badge--1"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n1.svg' ) ); ?>" alt="1"></div>
-            <div class="pspec__badge pspec__badge--2"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n2.svg' ) ); ?>" alt="2"></div>
-            <div class="pspec__badge pspec__badge--3"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n3.svg' ) ); ?>" alt="3"></div>
-            <div class="pspec__badge pspec__badge--4"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n4.svg' ) ); ?>" alt="4"></div>
-            <div class="pspec__badge pspec__badge--5"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n5.svg' ) ); ?>" alt="5"></div>
-            <div class="pspec__badge pspec__badge--6"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n6.svg' ) ); ?>" alt="6"></div>
+            <div class="pspec__badge pspec__badge--1"<?php echo motorsky_exploded_point_style( $ms_id, 0 ); ?>><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n1.svg' ) ); ?>" alt="1"></div>
+            <div class="pspec__badge pspec__badge--2"<?php echo motorsky_exploded_point_style( $ms_id, 1 ); ?>><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n2.svg' ) ); ?>" alt="2"></div>
+            <div class="pspec__badge pspec__badge--3"<?php echo motorsky_exploded_point_style( $ms_id, 2 ); ?>><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n3.svg' ) ); ?>" alt="3"></div>
+            <div class="pspec__badge pspec__badge--4"<?php echo motorsky_exploded_point_style( $ms_id, 3 ); ?>><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n4.svg' ) ); ?>" alt="4"></div>
+            <div class="pspec__badge pspec__badge--5"<?php echo motorsky_exploded_point_style( $ms_id, 4 ); ?>><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n5.svg' ) ); ?>" alt="5"></div>
+            <div class="pspec__badge pspec__badge--6"<?php echo motorsky_exploded_point_style( $ms_id, 5 ); ?>><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/e2-n6.svg' ) ); ?>" alt="6"></div>
         </div>
 
         <div class="pspec__callouts">

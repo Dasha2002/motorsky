@@ -10,7 +10,7 @@
     </div></section>
     <section><h2>Техническая документация</h2><ul class="ms-document-list">
         <?php foreach ( motorsky_product_fields() as $key => $field ) : if ( 'document' !== $field[2] ) { continue; } $url = motorsky_product_value( $id, $key ); ?>
-            <li><?php if ( $url ) : ?><a href="<?php echo esc_url( $url ); ?>" download data-ms-event="document_download" data-document="<?php echo esc_attr( $key ); ?>" data-product-id="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( get_the_title() . ' — ' . $field[0] ); ?> ↓</a>
+            <li><?php if ( $url ) : ?><a href="<?php echo esc_url( $url ); ?>"<?php echo 'doc_step' === $key ? ' download' : ''; ?> target="_blank" rel="noopener noreferrer" data-ms-event="document_download" data-document="<?php echo esc_attr( $key ); ?>" data-product-id="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( get_the_title() . ' — ' . $field[0] ); ?> <?php echo 'doc_step' === $key ? '↓' : '↗'; ?></a>
             <?php else : ?><span><?php echo esc_html( get_the_title() . ' — ' . $field[0] ); ?>: файл готовится</span><?php endif; ?></li>
         <?php endforeach; ?>
     </ul></section>

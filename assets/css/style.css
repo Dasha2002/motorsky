@@ -9,7 +9,7 @@
   --ms-muted: #777777;
   --ms-line: #CCCCCC;
   --ms-white: #FFFFFF;
-  --ms-container: 1200px;
+  --ms-container: clamp(1200px, calc(100vw - 160px), 2400px);
   --ms-header-h: 80px;
   --ms-radius: 24px;
   --ms-radius-sm: 16px;
@@ -373,6 +373,13 @@ h2 {
   background: currentColor;
 }
 
+
+@media (min-width: 1361px) {
+  .site-header__inner { width: 100%; padding: 0; }
+  .site-header_blure { flex: 1; min-width: 0; }
+  .site-header_blure > nav { flex: 1; }
+  .site-nav { justify-content: space-between; }
+}
 
 /* ============ Адаптив ============ */
 @media (max-width: 1024px) {
@@ -2754,16 +2761,19 @@ position: absolute;
 
 /* Callouts — 6 выносок в 2 колонки */
 .pspec__callouts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px 48px;
+  column-count: 2;
+  column-gap: 48px;
   margin: 64px 0;
 }
 .pspec__callout {
   display: flex;
+  break-inside: avoid;
+  margin-bottom: 24px;
   align-items: flex-start;
   gap: 16px;
 }
+.pspec__callout:nth-child(4) { break-before: column; }
+.pspec__callout:nth-child(3), .pspec__callout:last-child { margin-bottom: 0; }
 .pspec__callout img {
   width: 36px;
   height: 36px;
@@ -3000,7 +3010,8 @@ position: absolute;
   .pspec__head { font-size: 28px; }
   .pspec__intro { font-size: 15px; margin-bottom: 40px; }
   .pspec__exploded { max-width: 700px; margin-bottom: 48px; }
-  .pspec__callouts { gap: 20px 32px; margin: 48px 0; }
+  .pspec__callouts { column-gap: 32px; margin: 48px 0; }
+  .pspec__callout { margin-bottom: 20px; }
   .pspec__callout img { width: 32px; height: 32px; }
   .pspec__callout p { font-size: 14px; }
   .pspec__table { padding: 32px 40px; gap: 32px; }
@@ -3019,10 +3030,12 @@ position: absolute;
   .pspec__exploded { max-width: 600px; margin-bottom: 40px; }
 
   .pspec__callouts {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     margin: 40px 0;
   }
+  .pspec__callout { margin-bottom: 0; }
 
   /* Таблица — 1 колонка */
   .pspec__table {
@@ -3433,7 +3446,7 @@ position: absolute;
 }
 
 .servo-info__container {
-  width: min(100% - 40px, 1200px);
+  width: min(100% - 40px, var(--ms-container));
   margin: 0 auto;
 }
 

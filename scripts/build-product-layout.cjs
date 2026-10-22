@@ -42,6 +42,7 @@ $ms_callout_defaults = ${phpArray(callouts)};
 ?>\n` + specs;
 specs = specs.replace(/<p class="pspec__intro">[\s\S]*?<\/p>/, `<p class="pspec__intro"><?php echo esc_html( motorsky_layout_intro( $ms_id ) ); ?></p>`);
 specs = specs.replace(/<img class="pspec__exploded-img"[^>]*\?>"[^>]*>/, `<?php if ( $ms_exploded ) : ?><img class="pspec__exploded-img" src="<?php echo esc_url( $ms_exploded ); ?>" alt="<?php echo esc_attr( 'Разнесённая схема ' . get_the_title() ); ?>"><?php endif; ?>`);
+specs = specs.replace(/class="pspec__badge pspec__badge--(\d)"/g, (_, number) => `class="pspec__badge pspec__badge--${number}"<?php echo motorsky_exploded_point_style( $ms_id, ${Number(number) - 1} ); ?>`);
 let calloutIndex = 0;
 specs = specs.replace(/(<div class="pspec__callout">[\s\S]*?<p>)([^<]+)(<\/p>)/g, (_,open,text,close) => {
  const i = calloutIndex++;

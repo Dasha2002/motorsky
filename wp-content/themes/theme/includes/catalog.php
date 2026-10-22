@@ -32,6 +32,7 @@ function motorsky_product_fields() {
         'applications' => array( 'Применение: четыре заголовка — по одному на строке', 'textarea', 'layout' ),
         'gallery' => array( 'Изображения свайпера — порядок слайдов', 'gallery', 'media' ),
         'exploded_image' => array( 'Разнесённая схема двигателя (изображение с выносками 1–6)', 'image', 'media' ),
+        'exploded_points' => array( 'Положение меток на схеме', 'points', 'media' ),
         'schematics' => array( 'Чертежи под схемой — порядок изображений', 'gallery', 'media' ),
         'graph_thrust_current' => array( 'График: тяга / ток', 'image', 'graph' ),
         'graph_thrust_power' => array( 'График: тяга / мощность', 'image', 'graph' ),
@@ -41,8 +42,6 @@ function motorsky_product_fields() {
         'doc_drawing' => array( 'Чертёж', 'url', 'document' ),
         'doc_step' => array( '3D-модель STEP', 'url', 'document' ),
         'doc_tests' => array( 'Результаты испытаний', 'url', 'document' ),
-        'seo_title' => array( 'SEO Title', 'text', 'seo' ),
-        'seo_description' => array( 'SEO Description', 'textarea', 'seo' ),
     );
 }
 
@@ -54,6 +53,18 @@ function motorsky_product_value( $id, $key ) {
 function motorsky_clean_product_value( $value, $type ) {
     if ( ! is_scalar( $value ) ) { return ''; }
     $value = trim( (string) $value );
+    if ( 'points' === $type ) {
+        $points = json_decode( $value, true );
+        if ( ! is_array( $points ) || array_keys( $points ) !== range( 0, 5 ) ) { return ''; }
+        foreach ( $points as $point ) {
+            if ( ! is_array( $point ) || array_keys( $point ) !== array( 0, 1 ) ) { return ''; }
+            foreach ( $point as $coordinate ) {
+                if ( ! is_int( $coordinate ) && ! is_float( $coordinate ) ) { return ''; }
+                if ( ! is_finite( (float) $coordinate ) || $coordinate < 0 || $coordinate > 100 ) { return ''; }
+            }
+        }
+        return json_encode( $points );
+    }
     if ( 'checkbox' === $type ) { return '1' === $value ? '1' : '0'; }
     if ( 'number' === $type ) {
         $value = str_replace( ',', '.', $value );
@@ -66,6 +77,36 @@ function motorsky_clean_product_value( $value, $type ) {
         return implode( ',', $ids );
     }
     return 'textarea' === $type ? sanitize_textarea_field( $value ) : sanitize_text_field( $value );
+}
+
+function motorsky_exploded_points( $id ) {
+    $value = motorsky_clean_product_value( motorsky_product_value( $id, 'exploded_points' ), 'points' );
+    return '' !== $value ? json_decode( $value, true ) : array( array( 19, 58 ), array( 39, 58 ), array( 58, 58 ), array( 85, 43 ), array( 79, 60 ), array( 90, 60 ) );
+}
+
+function motorsky_exploded_point_style( $id, $index ) {
+    if ( '' === motorsky_clean_product_value( motorsky_product_value( $id, 'exploded_points' ), 'points' ) ) { return ''; }
+    $point = motorsky_exploded_points( $id )[ $index ];
+    return ' style="' . esc_attr( 'left:' . $point[0] . '%;top:' . $point[1] . '%;' ) . '"';
+}
+
+function motorsky_exploded_editor( $id ) {
+    $points = motorsky_exploded_points( $id );
+    $image = motorsky_product_value( $id, 'exploded_image' );
+    $fallback = motorsky_original_2807( $id ) ? get_theme_file_uri( 'assets/img/e2-3d.png' ) : '';
+    if ( '' === $image ) { $image = $fallback; }
+    echo '<div class="motorsky-points" data-fallback="' . esc_url( $fallback ) . '"><input type="hidden" id="motorsky-exploded_points" name="motorsky[exploded_points]" value="' . esc_attr( json_encode( $points ) ) . '">';
+    echo '<p class="description">Зажмите метку мышью и перетащите её на нужную деталь изображения. На телефоне двигайте метки пальцем. Можно также выбрать метку клавишей Tab и перемещать стрелками. Нажмите «Обновить» или «Опубликовать», чтобы сохранить.</p>';
+    echo '<div class="motorsky-points__preview"' . ( '' === $image ? ' hidden' : '' ) . '><img class="motorsky-points__image"' . ( '' !== $image ? ' src="' . esc_url( $image ) . '"' : '' ) . ' alt="Предпросмотр разнесённой схемы">';
+    $labels = array( 'Вал', 'Корпус / колокол', 'Магниты', 'Провод', 'Подшипники', 'Сталь' );
+    foreach ( $points as $index => $point ) {
+        echo '<button type="button" class="motorsky-points__marker" data-point="' . $index . '" aria-label="' . esc_attr( 'Метка ' . ( $index + 1 ) . ': ' . $labels[ $index ] ) . '" style="left:' . $point[0] . '%;top:' . $point[1] . '%">' . ( $index + 1 ) . '</button>';
+    }
+    echo '</div><p class="description" data-points-empty' . ( '' !== $image ? ' hidden' : '' ) . '>Выберите изображение схемы в поле выше для предпросмотра.</p>';
+    echo '<ul class="motorsky-points__legend">';
+    foreach ( $labels as $index => $label ) { echo '<li>' . esc_html( ( $index + 1 ) . '. ' . $label ) . '</li>'; }
+    echo '</ul>';
+    echo '<p class="screen-reader-text" data-points-status role="status" aria-live="polite"></p></div>';
 }
 
 function motorsky_product_boxes() {
@@ -92,7 +133,7 @@ function motorsky_gallery_editor( $post_id, $key, $input_id ) {
 function motorsky_product_box( $post ) {
     wp_nonce_field( 'motorsky_product_save', 'motorsky_product_nonce' );
     echo '<p>Заполняйте по исходной документации. Числовые поля — без единиц измерения; десятичный разделитель — точка или запятая. Массу можно указывать с допуском, например 55±2. Пустые параметры не подменяются данными другой модели. Для платформы и назначения укажите одно основное значение для фильтра.</p>';
-    $groups = array( 'visibility' => 'Отображение товара', 'filter' => 'Основные характеристики и фильтры', 'spec' => 'Дополнительные параметры', 'material' => 'Материалы и комплектующие', 'content' => 'Текстовые данные', 'layout' => 'Секции исходной страницы товара', 'media' => 'Изображения', 'graph' => 'Испытания', 'document' => 'Документация', 'seo' => 'SEO' );
+    $groups = array( 'visibility' => 'Отображение товара', 'filter' => 'Основные характеристики и фильтры', 'spec' => 'Дополнительные параметры', 'material' => 'Материалы и комплектующие', 'content' => 'Текстовые данные', 'layout' => 'Секции исходной страницы товара', 'media' => 'Изображения', 'graph' => 'Испытания', 'document' => 'Документация' );
     foreach ( $groups as $group => $heading ) {
         echo '<h3>' . esc_html( $heading ) . '</h3><table class="form-table"><tbody>';
         foreach ( motorsky_product_fields() as $key => $field ) {
@@ -102,6 +143,8 @@ function motorsky_product_box( $post ) {
             echo '<tr><th><label for="' . esc_attr( $id ) . '">' . esc_html( $field[0] ) . '</label></th><td>';
             if ( 'gallery' === $field[1] ) {
                 motorsky_gallery_editor( $post->ID, $key, $id );
+            } elseif ( 'points' === $field[1] ) {
+                motorsky_exploded_editor( $post->ID );
             } elseif ( 'checkbox' === $field[1] ) {
                 echo '<input type="hidden" name="motorsky[' . esc_attr( $key ) . ']" value="0"><input type="checkbox" id="' . esc_attr( $id ) . '" name="motorsky[' . esc_attr( $key ) . ']" value="1" ' . checked( $value, '1', false ) . '>';
                 if ( 'show_on_home' === $key ) { echo '<p class="description">При включении опубликованный товар появится на главной и в общем каталоге. Без галочки — только в общем каталоге.</p>'; }
@@ -238,10 +281,6 @@ function motorsky_product_menu() {
 
 function motorsky_catalog_title( $parts ) {
     if ( is_post_type_archive( 'motorsky_product' ) ) { $parts['title'] = motorsky_setting( 'catalog_title', 'Каталог электродвигателей MotorSky' ); }
-    elseif ( is_singular( 'motorsky_product' ) ) {
-        $title = motorsky_product_value( get_queried_object_id(), 'seo_title' );
-        if ( '' !== $title ) { $parts['title'] = $title; }
-    }
     return $parts;
 }
 add_filter( 'document_title_parts', 'motorsky_catalog_title' );
@@ -253,8 +292,7 @@ function motorsky_catalog_description() {
         $description = motorsky_setting( 'catalog_description', 'Каталог электродвигателей MotorSky для БАС и робототехники. Характеристики, испытания и техническая документация. Подбор двигателя и запрос КП.' );
     } elseif ( is_singular( 'motorsky_product' ) ) {
         $id = get_queried_object_id();
-        $description = motorsky_product_value( $id, 'seo_description' );
-        if ( '' === $description ) { $description = get_the_title( $id ) . ' — характеристики, испытания и документация MotorSky. Запросить коммерческое предложение.'; }
+        $description = get_the_title( $id ) . ' — характеристики, испытания и документация MotorSky. Запросить коммерческое предложение.';
     }
     if ( '' !== $description ) { echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n"; }
 }

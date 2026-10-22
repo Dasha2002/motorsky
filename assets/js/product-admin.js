@@ -95,7 +95,66 @@
     list.addEventListener('dragend', function () { if (dragged) dragged.classList.remove('is-dragging'); dragged = null; });
     render();
   }
-  function initGalleries() { document.querySelectorAll('.motorsky-gallery').forEach(initGallery); }
+  function initPoints(root) {
+    var input = root.querySelector('input[type="hidden"]');
+    var source = document.getElementById('motorsky-exploded_image');
+    var preview = root.querySelector('.motorsky-points__preview');
+    var image = root.querySelector('.motorsky-points__image');
+    var empty = root.querySelector('[data-points-empty]');
+    var status = root.querySelector('[data-points-status]');
+    var points = JSON.parse(input.value);
+    var markers = root.querySelectorAll('.motorsky-points__marker');
+    var fallback = root.dataset.fallback || '';
+    var dragged = null;
+    function save(index, x, y) {
+      points[index] = [x, y].map(function (value) { return Math.round(Math.max(0, Math.min(100, value)) * 10) / 10; });
+      markers[index].style.left = points[index][0] + '%';
+      markers[index].style.top = points[index][1] + '%';
+      input.value = JSON.stringify(points);
+      input.dispatchEvent(new Event('change', {bubbles: true}));
+      status.textContent = 'Положение метки ' + (Number(index) + 1) + ' изменено. Сохраните товар.';
+    }
+    function updateImage() {
+      var url = source.value.trim() || fallback;
+      var valid = /^https?:\/\//i.test(url);
+      preview.hidden = !valid;
+      empty.hidden = valid;
+      if (valid) image.src = url;
+      else image.removeAttribute('src');
+    }
+    source.addEventListener('change', updateImage);
+    source.addEventListener('input', updateImage);
+    image.addEventListener('error', function () { preview.hidden = true; empty.hidden = false; empty.textContent = 'Не удалось загрузить изображение. Проверьте ссылку на схему.'; });
+    image.addEventListener('load', function () { preview.hidden = false; empty.hidden = true; });
+    function move(event) {
+      var rect = preview.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      save(dragged, (event.clientX - rect.left) / rect.width * 100, (event.clientY - rect.top) / rect.height * 100);
+    }
+    markers.forEach(function (marker, index) {
+      marker.addEventListener('pointerdown', function (event) {
+        if (event.button !== 0) return;
+        event.preventDefault();
+        dragged = index;
+        marker.setPointerCapture(event.pointerId);
+        marker.classList.add('is-dragging');
+        marker.focus({preventScroll: true});
+      });
+      marker.addEventListener('pointermove', function (event) { if (dragged === index && marker.hasPointerCapture(event.pointerId)) move(event); });
+      marker.addEventListener('pointerup', function (event) { if (dragged === index && marker.hasPointerCapture(event.pointerId)) { move(event); marker.releasePointerCapture(event.pointerId); } dragged = null; });
+      marker.addEventListener('lostpointercapture', function () { dragged = null; marker.classList.remove('is-dragging'); });
+      marker.addEventListener('keydown', function (event) {
+        var delta = {ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1]}[event.key];
+        if (!delta) return;
+        event.preventDefault();
+        save(index, points[index][0] + delta[0], points[index][1] + delta[1]);
+      });
+    });
+  }
+  function initGalleries() {
+    document.querySelectorAll('.motorsky-gallery').forEach(initGallery);
+    document.querySelectorAll('.motorsky-points').forEach(initPoints);
+  }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGalleries);
   else initGalleries();
   document.addEventListener('click', function (event) {

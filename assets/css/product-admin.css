@@ -7,3 +7,10 @@
 .motorsky-gallery__actions { display: flex; gap: 4px; flex-wrap: wrap; }
 .motorsky-gallery__actions .button { min-height: 28px; padding: 0 7px; }
 .motorsky-gallery__empty { color: #646970; }
+.motorsky-points__preview { position: relative; max-width: 900px; margin: 16px 0; }
+.motorsky-points__preview[hidden] { display: none; }
+.motorsky-points__image { display: block; width: 100%; height: auto; }
+.motorsky-points__marker { position: absolute; transform: translate(-50%,-50%); width: 32px; height: 32px; padding: 0; border: 2px solid #fff; border-radius: 50%; background: #007cba; color: #fff; font-weight: 700; box-shadow: 0 1px 4px #0006; cursor: grab; touch-action: none; }
+.motorsky-points__marker:focus-visible { outline: 3px solid #1d2327; outline-offset: 2px; }
+.motorsky-points__marker.is-dragging { cursor: grabbing; }
+.motorsky-points__legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 12px 0; padding: 0; list-style: none; }
